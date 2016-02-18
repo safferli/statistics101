@@ -61,7 +61,7 @@ ggplot()+
 set.seed(1001);exp <- rexp(50, 5)+10
 hist(exp)
 
-
+load("commute-distances.Rdata")
 
 
 
