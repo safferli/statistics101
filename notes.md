@@ -10,7 +10,7 @@ http://datascienceplus.com/standard-deviation-vs-standard-error/
     - normal distribution
     - uniform distribution
     - Poisson distribution
-- logarithms
+- logarithms(?)
 - lognormal distribution
 - explain distributions
     - mean (average)
@@ -20,6 +20,7 @@ http://datascienceplus.com/standard-deviation-vs-standard-error/
     - $E[ax] = aE[x]$
     - $var(ax) = a^2 var(x)$
     - Steinerscher Verschiebungssatz
+    - Bayes Rule! http://timharford.com/2016/03/how-to-make-good-guesses
 - distributions (detailed with mean/variance)
     - show true distribution, and pick 10/100 random data
 - correlation
