@@ -12,8 +12,8 @@ library(dplyr)
 #library(data.table)
 
 # Define your workspace: "X:/xxx/"
-#wd <- "D:/github/statistics101/"
-wd <- "/home/csafferling/Documents/github/statistics101"
+wd <- "D:/github/statistics101/"
+#wd <- "/home/csafferling/Documents/github/statistics101"
 setwd(wd)
 
 
@@ -64,10 +64,13 @@ hist(exp)
 
 load("commute-distances.Rdata")
 
+dta.distance %>% 
+  filter(minutes < 120) %>% 
+  ggplot()+
+  geom_histogram(aes(x=minutes))
 
-
-
-
+mean(dta.distance$minutes)
+median(dta.distance$minutes)
 
 
 
