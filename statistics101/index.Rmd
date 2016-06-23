@@ -12,15 +12,135 @@ mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
 ---
 
+```{R preamble, include=FALSE}
+options(bitmapType='cairo')
+options(scipen = 999)
+library(ggplot2)
+library(dplyr)
+set.seed(42)
+```
+
 ## Read-And-Delete
 
 1. Edit YAML front matter
 2. Write using R Markdown
 3. Use an empty line followed by three dashes to separate slides!
 
---- .class #id 
+--- .class #id &vertical
 
-## Slide 2
+## Statistics
+
+> The practice or science of collecting and analysing numerical data in large quantities, especially for the purpose of inferring proportions in a whole from those in a representative sample.  
+> [OED definition](http://www.oxforddictionaries.com/definition/english/statistics)
+
+<!--
+Statistics is the study of the collection, analysis, interpretation, presentation, and organization of data.
+Dodge, Y. (2006) The Oxford Dictionary of Statistical Terms, OUP. ISBN 0-19-920613-9
+-->
+
+<!--
+* *Descriptive statistics*
+involves methods of organizing, picturing and summarizing information from data.  
+* *Inferential statistics*
+involves methods of using information from a sample to draw conclusions about thepopulation.
+-->
+
+***
+
+## Randomness
+
+> The quality or state of lacking a pattern or principle of organization; unpredictability  
+> [OED definition](http://www.oxforddictionaries.com/definition/english/randomness)
+
+
+---
+
+## Distributions
+
+***
+
+uniform
+
+*** 
+
+poisson
+
+*** 
+
+normal
+
+---
+
+## 
+
+- explain distributions
+    - mean (average)
+    - standard deviation/variance
+    - median
+    - quartiles
+    - Fehlerwartungen: avg vs median, Veränderung der Betrachtung, steamspy Settlers data
+
+
+
+
+
+
+---
+
+- correlation
+    - correlation vs causation: show how a third data point can drive the first two correlations
+
+```{R correlation}
+# correlation
+
+cor.dta <- data.frame( 
+  x = runif(100, min = 0, max = 10)
+) %>% 
+  mutate(
+    a = x + runif(100, -1, 1), 
+    b = x + runif(100, -1, 1)
+  )
+
+gg <- ggplot(cor.dta)+
+  geom_point()+
+  aes(x=a, y=b)+
+  geom_smooth()+
+  labs(x=NULL, y=NULL, title = "Scatterplot of A and B")
+gg
+```
+
+***
+
+```{R}
+gg+
+  geom_text(aes(x = 1, y = 9), label = "A=X+U[-1,1]\n B=X+U[-1,1]\n X~U[0,10]", hjust=0)
+```
+
+---
+
+- statistical difference/significance
+    - show how two data dots come from the same distribution and can be different
+    - t-test 
+
+
+
+
+---
+
+```{R}
+load("commute-distances.Rdata")
+
+dta.distance %>% 
+  #filter(minutes < 120) %>% 
+  ggplot()+
+  geom_histogram(aes(x=minutes))+
+  xlim(0, 100)+
+  labs(
+    title = "Commute time of BB DUS employees", 
+    y = NULL
+  )
+```
+
 
 
 

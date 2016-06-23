@@ -12,8 +12,8 @@ library(dplyr)
 #library(data.table)
 
 # Define your workspace: "X:/xxx/"
-wd <- "D:/github/statistics101/"
-#wd <- "/home/csafferling/Documents/github/statistics101"
+#wd <- "D:/github/statistics101/"
+wd <- "/home/csafferling/Documents/github/statistics101"
 setwd(wd)
 
 
@@ -71,7 +71,6 @@ dta.distance %>%
 
 mean(dta.distance$minutes)
 median(dta.distance$minutes)
-
 
 
 

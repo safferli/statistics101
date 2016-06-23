@@ -15,6 +15,10 @@ http://datascienceplus.com/standard-deviation-vs-standard-error/
     - Beispiele aus grossen Datenmengen, damit math. Formel nötig wird
 
 
+- statistics history
+    - S-Branch: http://www.economist.com/news/christmas-specials/21636589-how-statisticians-changed-war-and-war-changed-statistics-they-also-served
+    - RNG and women discarding "repeated numbers"
+
 - explain distributions
     - mean (average)
     - standard deviation/variance

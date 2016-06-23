@@ -6,7 +6,8 @@
 
 library(slidify)
 
-wd <- "D:/github/statistics101"
+#wd <- "D:/github/statistics101"
+wd <- "/home/csafferling/Documents/github/statistics101"
 setwd(wd)
 
 author("statistics101")
