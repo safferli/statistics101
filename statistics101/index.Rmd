@@ -123,7 +123,7 @@ gg+
     - t-test 
 
 
-
+Anscombe's quartet
 
 ---
 
@@ -141,6 +141,32 @@ dta.distance %>%
   )
 ```
 
+
+---
+
+
+Lesson 1: Visualizing relationships in data
+
+Seeing relationships in data and predicting based on them; Simpson's paradox
+Lesson 2: Probability
+
+Probability; Bayes Rule; Correlation vs. Causation
+Lesson 3: Estimation
+
+Maximum Likelihood Estimation; Mean, Median, Mode; Standard Deviation, Variance
+Lesson 4: Outliers and Normal Distribution
+
+Outliers, Quartiles; Binomial Distribution; Central Limit Theorem; Manipulating Normal Distribution
+Lesson 5: Inference
+
+Confidence intervals; Hypothesis Testing
+Lesson 6: Regression
+
+Linear regression; correlation
+Lesson 7: Final Exam
+
+
+---
 
 
 
