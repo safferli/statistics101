@@ -7,10 +7,10 @@
 library(slidify)
 
 #wd <- "D:/github/statistics101"
-wd <- "/home/csafferling/Documents/github/statistics101"
+wd <- path.expand("~/Documents/github/statistics101")
 setwd(wd)
 
-author("statistics101")
+author("statistics101", use_git = FALSE)
 slidify("index.Rmd")
 
 # The YAML parsing is done by the yaml package which will treat true as TRUE. 

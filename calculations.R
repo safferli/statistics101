@@ -13,7 +13,7 @@ library(dplyr)
 
 # Define your workspace: "X:/xxx/"
 #wd <- "D:/github/statistics101/"
-wd <- "/home/csafferling/Documents/github/statistics101"
+wd <- path.expand("~/Documents/github/statistics101")
 setwd(wd)
 
 
