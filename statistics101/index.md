@@ -7,7 +7,7 @@ url         : {lib: "."}    # this is important for reveal.js
 framework   : revealjs      # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
-widgets     : []            # {mathjax, quiz, bootstrap}
+widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
 ---
@@ -15,6 +15,8 @@ knit        : slidify::knit2slides
 
 
 
+
+titlepage
 
 --- &vertical
 
@@ -90,27 +92,54 @@ involves methods of using information from a sample to draw conclusions about th
 
 ## explain distributions
 
-- mean (average)
-- standard deviation/variance
-- median
-- quartiles
-- Fehlerwartungen: avg vs median, Veränderung der Betrachtung, steamspy Settlers data
+- most (nice) distributions can be explained by *moments*
+    - mean (average)
+    - standard deviation/variance
+- for the Normal distribution: $$X \sim \mathcal{N}(\mu,\sigma^2)$$
+
+<!--
+median, quartiles, Fehlererwartungen, Abweichung der Betrachtung, Steamspy settlers data
+-->
+
+--- &vertical
+
+## Bonus: Anscombe's Quartet
+
+- Anscombe, Francis J. (1973) *Graphs in statistical analysis*. [American Statistician, 27, pp. 17–21.](http://www.sjsu.edu/faculty/gerstman/StatPrimer/anscombe1973.pdf)
+- four $x, y$ datasets which have equal properties:
+    - mean, variance, correlation, linear regression
+    - $$y = 4 + 0.346x$$
+- showcase for data exploration!
+
+***
+
+![plot of chunk anscombe](assets/fig/anscombe-1.png)
 
 
+--- &vertical
 
+## Correlation vs Causation
 
+> (Statistics) A quantity measuring the extent of the interdependence of variable quantities.  
+> [OED definition](https://en.oxforddictionaries.com/definition/correlation)
 
-
----
-
-- correlation
-    - correlation vs causation: show how a third data point can drive the first two correlations
+***
 
 ![plot of chunk correlation](assets/fig/correlation-1.png)
 
 ***
 
-![plot of chunk unnamed-chunk-1](assets/fig/unnamed-chunk-1-1.png)
+![plot of chunk correlation-exposed](assets/fig/correlation-exposed-1.png)
+
+---
+
+## Linear Regression
+
+$$y_i = \beta_0 + \beta_i + \varepsilon_i$$
+
+- fitted values: $$\hat y = b_0 + b_ix_i$$
+- residuals: $$e_i = y_i - \hat y_i$$
+
 
 ---
 
@@ -118,12 +147,6 @@ involves methods of using information from a sample to draw conclusions about th
     - show how two data dots come from the same distribution and can be different
     - t-test 
 
-
-Anscombe's quartet
-
----
-
-asdf
 
 
 ---

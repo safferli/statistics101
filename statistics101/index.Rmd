@@ -7,7 +7,7 @@ url         : {lib: "."}    # this is important for reveal.js
 framework   : revealjs      # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
-widgets     : []            # {mathjax, quiz, bootstrap}
+widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
 ---
@@ -25,6 +25,7 @@ library(ggplot2)
 library(dplyr)
 set.seed(42)
 
+wd <- path.expand("~/Documents/github/statistics101")
 # commute dataset
 load(file.path(wd, "commute-distances.Rdata"))
 ```
@@ -80,7 +81,7 @@ involves methods of using information from a sample to draw conclusions about th
 dta.distance %>% 
   #filter(minutes < 120) %>% 
   ggplot()+
-  geom_histogram(aes(x=minutes, y=..density..))+
+  geom_histogram(aes(x=minutes))+
   #geom_line(stat="density", aes(x=minutes), colour = "red")+
   xlim(0, 100)+
   labs(
@@ -153,27 +154,31 @@ ggplot()+
   labs(x = "", y = "", title = "(Standard-) Normal distribution")
 ```
 
----
+--- &vertical
 
 ## explain distributions
 
-$$X \sim \mathcal{N}(\mu,\sigma^2)$$
+- most (nice) distributions can be explained by *moments*
+    - mean (average)
+    - standard deviation/variance
+- for the Normal distribution: $$X \sim \mathcal{N}(\mu,\sigma^2)$$
 
-- mean (average)
-- standard deviation/variance
-- median
-- quartiles
-- Fehlerwartungen: avg vs median, Veränderung der Betrachtung, steamspy Settlers data
+<!--
+median, quartiles, Fehlererwartungen, Abweichung der Betrachtung, Steamspy settlers data
+-->
 
+***
 
+mean and variance in plot
 
 --- &vertical
 
 ## Bonus: Anscombe's Quartet
 
-- Anscombe, Francis J. (1973) *Graphs in statistical analysis*. American Statistician, 27, pp. 17–21.
+- Anscombe, Francis J. (1973) *Graphs in statistical analysis*. [American Statistician, 27, pp. 17–21.](http://www.sjsu.edu/faculty/gerstman/StatPrimer/anscombe1973.pdf)
 - four $x, y$ datasets which have equal properties:
     - mean, variance, correlation, linear regression
+    - $$y = 4 + 0.346x$$
 - showcase for data exploration!
 
 ***
@@ -232,6 +237,16 @@ gg
 gg+
   geom_text(aes(x = 1, y = 9), label = "A=X+U[-1,1]\n B=X+U[-1,1]\n X~U[0,10]", hjust=0)
 ```
+
+---
+
+## Linear Regression
+
+$$y_i = \beta_0 + \beta_i + \varepsilon_i$$
+
+- fitted values: $$\hat y = b_0 + b_ix_i$$
+- residuals: $$e_i = y_i - \hat y_i$$
+
 
 ---
 

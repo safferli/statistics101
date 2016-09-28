@@ -20,7 +20,8 @@
     <div class="slides">
       <section class='' data-state='' id='slide-1'>
   
-  
+  <p>titlepage</p>
+
 </section>
 <section>
    <section class='' data-state=''>
@@ -122,28 +123,84 @@ involves methods of using information from a sample to draw conclusions about th
 <section class='' data-state='' id='slide-5'>
   <h2>explain distributions</h2>
   <ul>
-<li>mean (average)</li>
-<li>standard deviation/variance</li>
-<li>median</li>
-<li>quartiles</li>
-<li>Fehlerwartungen: avg vs median, Veränderung der Betrachtung, steamspy Settlers data</li>
-</ul>
-
-</section>
-<section class='' data-state='' id='slide-6'>
-  
-  <ul>
-<li>correlation
+<li>most (nice) distributions can be explained by <em>moments</em>
 
 <ul>
-<li>correlation vs causation: show how a third data point can drive the first two correlations</li>
+<li>mean (average)</li>
+<li>standard deviation/variance</li>
 </ul></li>
+<li>for the Normal distribution: \[X \sim \mathcal{N}(\mu,\sigma^2)\]</li>
 </ul>
 
-<p><img src="assets/fig/correlation-1.png" alt="plot of chunk correlation"></p>
+<!--
+median, quartiles, Fehlererwartungen, Abweichung der Betrachtung, Steamspy settlers data
+-->
 
 </section>
-<section class='' data-state='' id='slide-7'>
+<section>
+   <section class='' data-state=''>
+    <h2>Bonus: Anscombe&#39;s Quartet</h2>
+    <ul>
+<li>Anscombe, Francis J. (1973) <em>Graphs in statistical analysis</em>. <a href="http://www.sjsu.edu/faculty/gerstman/StatPrimer/anscombe1973.pdf">American Statistician, 27, pp. 17–21.</a></li>
+<li>four \(x, y\) datasets which have equal properties:
+
+<ul>
+<li>mean, variance, correlation, linear regression</li>
+<li>\[y = 4 + 0.346x\]</li>
+</ul></li>
+<li>showcase for data exploration!</li>
+</ul>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+   <section class='' data-state=''>
+    <p><img src="assets/fig/anscombe-1.png" alt="plot of chunk anscombe"></p>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+</section>
+<section>
+   <section class='' data-state=''>
+    <h2>Correlation vs Causation</h2>
+    <blockquote>
+<p>(Statistics) A quantity measuring the extent of the interdependence of variable quantities.<br>
+<a href="https://en.oxforddictionaries.com/definition/correlation">OED definition</a></p>
+</blockquote>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+   <section class='' data-state=''>
+    <p><img src="assets/fig/correlation-1.png" alt="plot of chunk correlation"></p>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+   <section class='' data-state=''>
+    <p><img src="assets/fig/correlation-exposed-1.png" alt="plot of chunk correlation-exposed"></p>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+</section>
+<section class='' data-state='' id='slide-8'>
+  <h2>Linear Regression</h2>
+  <p>\[y_i = \beta_0 + \beta_i + \varepsilon_i\]</p>
+
+<ul>
+<li>fitted values: \[\hat y = b_0 + b_ix_i\]</li>
+<li>residuals: \[e_i = y_i - \hat y_i\]</li>
+</ul>
+
+</section>
+<section class='' data-state='' id='slide-9'>
   
   <ul>
 <li>statistical difference/significance
@@ -154,15 +211,8 @@ involves methods of using information from a sample to draw conclusions about th
 </ul></li>
 </ul>
 
-<p>Anscombe&#39;s quartet</p>
-
 </section>
-<section class='' data-state='' id='slide-8'>
-  
-  <p>asdf</p>
-
-</section>
-<section class='' data-state='' id='slide-9'>
+<section class='' data-state='' id='slide-10'>
   
   <p>Lesson 1: Visualizing relationships in data</p>
 
@@ -185,7 +235,7 @@ Lesson 6: Regression</p>
 Lesson 7: Final Exam</p>
 
 </section>
-<section class='' data-state='' id='slide-10'>
+<section class='' data-state='' id='slide-11'>
   
   
 </section>
@@ -216,7 +266,21 @@ Lesson 7: Final Exam</p>
       //{ src: './frameworks/revealjs/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
       ]
   });
-  </script>  <!-- LOAD HIGHLIGHTER JS FILES -->
+  </script>  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+<script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="./widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
 <script src="./highlighters/highlight.js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 <!-- DONE LOADING HIGHLIGHTER JS FILES -->
