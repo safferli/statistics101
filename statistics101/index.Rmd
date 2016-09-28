@@ -39,9 +39,10 @@ titlepage
 > The practice or science of collecting and analysing numerical data in large quantities, especially for the purpose of inferring proportions in a whole from those in a representative sample.  
 > [OED definition](http://www.oxforddictionaries.com/definition/english/statistics)
 
+<!-- -->
 
 > Statistics is the study of the collection, analysis, interpretation, presentation, and organization of data.  
-> Dodge, Y. (2006) The Oxford Dictionary of Statistical Terms, OUP. ISBN 0-19-920613-9
+> [The Oxford Dictionary of Statistical Terms](https://global.oup.com/academic/product/the-oxford-dictionary-of-statistical-terms-9780199206131?cc=de&lang=en&)
 
 <!--
 * *Descriptive statistics*
@@ -162,6 +163,9 @@ ggplot()+
     - mean (average)
     - standard deviation/variance
 - for the Normal distribution: $$X \sim \mathcal{N}(\mu,\sigma^2)$$
+    - $\mu = E[X]$
+    - $\sigma = \sqrt{E[(X-\mu)^2]}$
+    - $\sigma = \sqrt{E[X^2] - (E[X])^2}$
 
 <!--
 median, quartiles, Fehlererwartungen, Abweichung der Betrachtung, Steamspy settlers data
@@ -169,7 +173,21 @@ median, quartiles, Fehlererwartungen, Abweichung der Betrachtung, Steamspy settl
 
 ***
 
-mean and variance in plot
+### Mean and Standard Deviation
+
+![](./assets/img/Standard_deviation_diagram.svg)
+
+***
+
+### Median
+
+***
+
+### Others
+
+- quartiles
+- correlation
+
 
 --- &vertical
 
