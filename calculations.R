@@ -74,6 +74,39 @@ median(dta.distance$minutes)
 
 
 
+library(readr)
+library(tidyr)
+
+f.sum.sec <- function(t){
+  time <- strsplit(trimws(t), split = ":")
+  return(
+    (as.integer(time[1])*60+as.integer(time[2]))/3600
+    )
+}
+
+
+
+sspy <- read_csv("../steamspy-2016-chart.csv") %>% 
+  setNames(make.names(names(.))) %>% 
+  separate(Playtime..Median., c("playtime_avg", "playtime_med"), sep = "\\(", remove = FALSE) %>% 
+  mutate(
+    playtime_avg = f.sum.sec(playtime_avg)
+    #playtime_med = f.sum.sec(gsub(")", "", playtime_med))
+  )
+
+tt <- sspy$playtime_avg
+tt
+strsplit(trimws(tt), split = ":")
+
+f.sum.sec(tt)
+
+
+
+
+
+
+
+
 
 
 

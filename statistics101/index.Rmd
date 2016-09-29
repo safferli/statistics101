@@ -15,7 +15,7 @@ knit        : slidify::knit2slides
 ```{r setup, include=FALSE}
 # golden ratio: 0.5*(1-sqrt(5))
 knitr::opts_chunk$set(fig.width=10, fig.asp=(2/(1+sqrt(5))))
-knitr::opts_chunk$set(echo=FALSE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ```{R preamble, include=FALSE}
@@ -25,7 +25,8 @@ library(ggplot2)
 library(dplyr)
 set.seed(42)
 
-wd <- path.expand("~/Documents/github/statistics101")
+#wd <- path.expand("~/Documents/github/statistics101")
+wd <- "C:/github/statistics101"
 # commute dataset
 load(file.path(wd, "commute-distances.Rdata"))
 ```
@@ -75,6 +76,8 @@ involves methods of using information from a sample to draw conclusions about th
 
 <!-- from histogram to distribution -->
 
+Punktdiagramm zum Einstieg: Spielerlevel x, anzahl Gold y
+
 ### Histogram
 
 ```{R commute-hist, warning=FALSE, message=FALSE}
@@ -118,12 +121,14 @@ dta.distance %>%
 x <- seq(-5, 5, by = 0.01)
 
 ggplot()+
-  # normal distribution
+  # uniform distribution
   geom_line(
     aes(x=x, y=dunif(x, -4, 4)), size = 1.5#, colour = cbgPalette[6]
   )+
   labs(x = "", y = "", title = "Uniform distribution")
 ```
+
+Beispielrechnung mit konkreten Zahlen
 
 *** 
 
@@ -131,7 +136,7 @@ ggplot()+
 
 ```{r poisson}
 ggplot()+
-  # normal distribution
+  # poisson distribution
   geom_point(
     aes(x=unique(as.integer(x)), y=dpois(unique(as.integer(x)), 2)), size = 3.5#, colour = cbgPalette[2]
   )+
@@ -181,12 +186,20 @@ median, quartiles, Fehlererwartungen, Abweichung der Betrachtung, Steamspy settl
 
 ### Median
 
+mean vs median Steamspy data
+
 ***
 
 ### Others
 
 - quartiles
 - correlation
+
+***
+
+### summary
+
+mean, variance, median, lognormal (tail distributions in games)
 
 
 --- &vertical
@@ -271,12 +284,25 @@ $$y_i = \beta_0 + \beta_i + \varepsilon_i$$
 - statistical difference/significance
     - show how two data dots come from the same distribution and can be different
     - t-test 
+- representative Stichprobe, zB hohe level, wenig Spieler, Ausreisser/Verzerrung
 
+---
+
+## common mistakes
+
+- filtern nach sample
+    - filter bias
+- samples have too few players
+- avg vs mean (steamspy)
+    - distributions are important(!)
+- correlation is not causation
+- summing of data over variables (levels)
+- self-selection
 
 
 ---
 
-
+<!--
 Lesson 1: Visualizing relationships in data
 
 Seeing relationships in data and predicting based on them; Simpson's paradox
@@ -296,9 +322,7 @@ Lesson 6: Regression
 
 Linear regression; correlation
 Lesson 7: Final Exam
-
-
----
+-->
 
 
 

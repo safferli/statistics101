@@ -81,19 +81,6 @@ involves methods of using information from a sample to draw conclusions about th
 
 <h3>Histogram</h3>
 
-<pre><code class="r"># warning suppressed: non-finite values removed
-dta.distance %&gt;% 
-  #filter(minutes &lt; 120) %&gt;% 
-  ggplot()+
-  geom_histogram(aes(x=minutes))+
-  #geom_line(stat=&quot;density&quot;, aes(x=minutes), colour = &quot;red&quot;)+
-  xlim(0, 100)+
-  labs(
-    title = &quot;Commute time of BB DUS employees&quot;, 
-    y = NULL
-  )
-</code></pre>
-
 <p><img src="assets/fig/commute-hist-1.png" alt="plot of chunk commute-hist"></p>
 
     <aside class='notes'>
@@ -102,19 +89,6 @@ dta.distance %&gt;%
    </section>
    <section class='' data-state=''>
     <h3>Density estimates</h3>
-
-<pre><code class="r"># warning suppressed: non-finite values removed
-dta.distance %&gt;% 
-  #filter(minutes &lt; 120) %&gt;% 
-  ggplot()+
-  geom_histogram(aes(x=minutes, y=..density..))+
-  geom_line(stat=&quot;density&quot;, aes(x=minutes), colour = &quot;red&quot;)+
-  xlim(0, 100)+
-  labs(
-    title = &quot;Commute time of BB DUS employees&quot;, 
-    y = NULL
-  )
-</code></pre>
 
 <p><img src="assets/fig/commute-hist-dens-1.png" alt="plot of chunk commute-hist-dens"></p>
 
@@ -125,17 +99,6 @@ dta.distance %&gt;%
    <section class='' data-state=''>
     <h3>Uniform distribution</h3>
 
-<pre><code class="r"># x values for plotting
-x &lt;- seq(-5, 5, by = 0.01)
-
-ggplot()+
-  # normal distribution
-  geom_line(
-    aes(x=x, y=dunif(x, -4, 4)), size = 1.5#, colour = cbgPalette[6]
-  )+
-  labs(x = &quot;&quot;, y = &quot;&quot;, title = &quot;Uniform distribution&quot;)
-</code></pre>
-
 <p><img src="assets/fig/uniform-1.png" alt="plot of chunk uniform"></p>
 
     <aside class='notes'>
@@ -145,14 +108,6 @@ ggplot()+
    <section class='' data-state=''>
     <h3>Poisson (Count) distribution</h3>
 
-<pre><code class="r">ggplot()+
-  # normal distribution
-  geom_point(
-    aes(x=unique(as.integer(x)), y=dpois(unique(as.integer(x)), 2)), size = 3.5#, colour = cbgPalette[2]
-  )+
-  labs(x = &quot;&quot;, y = &quot;&quot;, title = &quot;Poisson (Count) distribution&quot;)
-</code></pre>
-
 <p><img src="assets/fig/poisson-1.png" alt="plot of chunk poisson"></p>
 
     <aside class='notes'>
@@ -161,18 +116,6 @@ ggplot()+
    </section>
    <section class='' data-state=''>
     <h3>Normal (Gaussian) distribution</h3>
-
-<pre><code class="r">ggplot()+
-  # normal distribution
-  geom_line(
-    aes(x=x, y=dnorm(x)), size = 1.5#, colour = cbgPalette[6]
-  )+
-#   # lognormal distribution
-#   geom_line(
-#     aes(x=x, y=dlnorm(x)), size = 1.5, colour = cbgPalette[6]
-#   )+
-  labs(x = &quot;&quot;, y = &quot;&quot;, title = &quot;(Standard-) Normal distribution&quot;)
-</code></pre>
 
 <p><img src="assets/fig/gaussian-1.png" alt="plot of chunk gaussian"></p>
 
@@ -225,7 +168,12 @@ median, quartiles, Fehlererwartungen, Abweichung der Betrachtung, Steamspy settl
     </aside>
    </section>
    <section class='' data-state=''>
-    <h3>Correlation</h3>
+    <h3>Others</h3>
+
+<ul>
+<li>quartiles</li>
+<li>correlation</li>
+</ul>
 
     <aside class='notes'>
       
@@ -251,24 +199,7 @@ median, quartiles, Fehlererwartungen, Abweichung der Betrachtung, Steamspy settl
     </aside>
    </section>
    <section class='' data-state=''>
-    <pre><code class="r">anscombe.dta &lt;- NULL
-for(i in 1:4){
-  anscombe.dta &lt;- bind_rows(
-    anscombe.dta, tibble(anscombe.set = letters[i], x = anscombe[, i], y = anscombe[, i+4])
-  )
-}
-
-anscombe.dta %&gt;% 
-  ggplot(aes(x, y))+
-  geom_point()+
-  geom_smooth(method = &quot;lm&quot;, se = FALSE)+
-  facet_grid(. ~ anscombe.set)+
-  labs(
-    x = &quot;x-values&quot;, y = &quot;y-values&quot;, title = &quot;Anscombe&#39;s Quartet&quot;
-  )
-</code></pre>
-
-<p><img src="assets/fig/anscombe-1.png" alt="plot of chunk anscombe"></p>
+    <p><img src="assets/fig/anscombe-1.png" alt="plot of chunk anscombe"></p>
 
     <aside class='notes'>
       
@@ -288,36 +219,14 @@ anscombe.dta %&gt;%
     </aside>
    </section>
    <section class='' data-state=''>
-    <pre><code class="r"># correlation
-
-cor.dta &lt;- data.frame( 
-  x = runif(100, min = 0, max = 10)
-) %&gt;% 
-  mutate(
-    a = x + runif(100, -1, 1), 
-    b = x + runif(100, -1, 1)
-  )
-
-gg &lt;- ggplot(cor.dta)+
-  geom_point()+
-  aes(x=a, y=b)+
-  geom_smooth()+
-  labs(x=NULL, y=NULL, title = &quot;Scatterplot of A and B&quot;)
-gg
-</code></pre>
-
-<p><img src="assets/fig/correlation-1.png" alt="plot of chunk correlation"></p>
+    <p><img src="assets/fig/correlation-1.png" alt="plot of chunk correlation"></p>
 
     <aside class='notes'>
       
     </aside>
    </section>
    <section class='' data-state=''>
-    <pre><code class="r">gg+
-  geom_text(aes(x = 1, y = 9), label = &quot;A=X+U[-1,1]\n B=X+U[-1,1]\n X~U[0,10]&quot;, hjust=0)
-</code></pre>
-
-<p><img src="assets/fig/correlation-exposed-1.png" alt="plot of chunk correlation-exposed"></p>
+    <p><img src="assets/fig/correlation-exposed-1.png" alt="plot of chunk correlation-exposed"></p>
 
     <aside class='notes'>
       
