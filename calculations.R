@@ -80,7 +80,7 @@ library(tidyr)
 
 f.sum.sec <- function(t){
   time <- strsplit(trimws(t), split = ":")
-  lapply(time, function(x){tt <- as.integer(x); return((tt[1]*60+tt[2])/3600)})
+  sapply(time, function(x){tt <- as.integer(x); return((tt[1]*60+tt[2])/3600)})
 }
 
 
@@ -89,8 +89,8 @@ sspy <- readr::read_csv("steamspy-2016-chart.csv") %>%
   setNames(make.names(names(.))) %>% 
   tidyr::separate(Playtime..Median., c("playtime_avg", "playtime_med"), sep = "\\(", remove = FALSE) %>% 
   mutate(
-    playtime_avg_h = unlist(f.sum.sec(playtime_avg)),
-    playtime_med_h = unlist(f.sum.sec(gsub(")", "", playtime_med)))
+    playtime_avg_h = f.sum.sec(playtime_avg),
+    playtime_med_h = f.sum.sec(gsub(")", "", playtime_med))
   )
 
 
