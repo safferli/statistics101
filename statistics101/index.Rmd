@@ -293,11 +293,14 @@ $$y_i = \beta_0 + \beta_i + \varepsilon_i$$
 - filtern nach sample
     - filter bias
 - samples have too few players
+    - outliers (also: cheats)
 - avg vs mean (steamspy)
     - distributions are important(!)
 - correlation is not causation
 - summing of data over variables (levels)
 - self-selection
+- check validity of data
+    - check for cheats
 
 
 ---
