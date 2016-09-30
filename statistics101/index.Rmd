@@ -62,7 +62,7 @@ involves methods of using information from a sample to draw conclusions about th
 
 - world's first statistics department at [University College London](https://www.ucl.ac.uk/statistics) in 1911
 - born in WW2: [S-Branch](http://www.economist.com/news/christmas-specials/21636589-how-statisticians-changed-war-and-war-changed-statistics-they-also-served)
-- RNG back then: lottery balls, and women picking "random" 
+- RNG back then: lottery balls, and women picking at "random" 
 
 <!-- The central office, the war cabinet was told, would produce "a regular series of figures on a coherent and well-ordered basis... that will be accepted and used without question". The new statisticians worked on government accounts; rationing (which ensured no Britons starved and greatly improved the diet of the poorest third); manpower surveys; the "pay as you earn"" system of taxation (which raised the cash needed to wage the war); and the Beveridge Report on social insurance that later led to the founding of the welfare state.
 -->
@@ -188,6 +188,14 @@ median, quartiles, Fehlererwartungen, Abweichung der Betrachtung, Steamspy settl
 
 ### Median
 
+- the *50% observation*
+- more resistant to outliers than the mean
+- example: D10 roll $X = {1, 1, 1, 1, 10}$
+    - mean: 2.8
+    - median: 1
+
+***
+
 ```{r median-steamspy, message = FALSE}
 f.sum.sec <- function(t){
   time <- strsplit(trimws(t), split = ":")
@@ -223,7 +231,8 @@ knitr::kable(sspy %>% filter(Price != "Free" & Owners.est > 5000) %>% select(Gam
 
 ### summary
 
-mean, variance, median, lognormal (tail distributions in games)
+- mean, variance, median, lognormal (tail distributions in games)
+- the density curve is always preferable to a moment! 
 
 
 --- &vertical
@@ -232,9 +241,8 @@ mean, variance, median, lognormal (tail distributions in games)
 
 - Anscombe, Francis J. (1973) *Graphs in statistical analysis*. [American Statistician, 27, pp. 17–21.](http://www.sjsu.edu/faculty/gerstman/StatPrimer/anscombe1973.pdf)
 - four $x, y$ datasets which have equal properties:
-    - mean, variance, correlation, linear regression
-    - $$y = 4 + 0.346x$$
-- showcase for data exploration!
+    - mean (9, 7.5), variance (11, 4.12), correlation (0.816), linear regression ($y = 4 + 0.346x$)
+- showcase for data exploration
 
 ***
 
@@ -293,6 +301,12 @@ gg+
   geom_text(aes(x = 1, y = 9), label = "A=X+U[-1,1]\n B=X+U[-1,1]\n X~U[0,10]", hjust=0)
 ```
 
+***
+
+### Bayes' Rule
+
+- asdf
+
 ---
 
 ## Linear Regression
@@ -322,6 +336,7 @@ $$y_i = \beta_0 + \beta_i + \varepsilon_i$$
     - distributions are important(!)
 - correlation is not causation
 - summing of data over variables (levels)
+    - lower levels have more players, so sums are much(!) larger
 - self-selection
 - check validity of data
     - check for cheats
