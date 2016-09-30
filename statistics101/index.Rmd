@@ -23,12 +23,9 @@ options(bitmapType='cairo')
 options(scipen = 999)
 library(ggplot2)
 library(dplyr)
+library(tidyr)
+library(readr)
 set.seed(42)
-
-#wd <- path.expand("~/Documents/github/statistics101")
-wd <- "C:/github/statistics101"
-# commute dataset
-load(file.path(wd, "commute-distances.Rdata"))
 ```
 
 titlepage
@@ -81,6 +78,9 @@ Punktdiagramm zum Einstieg: Spielerlevel x, anzahl Gold y
 ### Histogram
 
 ```{R commute-hist, warning=FALSE, message=FALSE}
+# commute dataset
+load("../commute-distances.Rdata")
+
 # warning suppressed: non-finite values removed
 dta.distance %>% 
   #filter(minutes < 120) %>% 
@@ -187,6 +187,21 @@ median, quartiles, Fehlererwartungen, Abweichung der Betrachtung, Steamspy settl
 ### Median
 
 mean vs median Steamspy data
+
+```{r medean-steamspy}
+f.sum.sec <- function(t){
+  time <- strsplit(trimws(t), split = ":")
+  sapply(time, function(x){tt <- as.integer(x); return((tt[1]*60+tt[2])/3600)})
+}
+
+sspy <- readr::read_csv("../steamspy-2016-chart.csv") %>% 
+  setNames(make.names(names(.))) %>% 
+  tidyr::separate(Playtime..Median., c("playtime_avg", "playtime_med"), sep = "\\(", remove = FALSE) %>% 
+  mutate(
+    playtime_avg_h = f.sum.sec(playtime_avg),
+    playtime_med_h = f.sum.sec(gsub(")", "", playtime_med))
+  )
+```
 
 ***
 
