@@ -209,9 +209,6 @@ median, quartiles, Fehlererwartungen, Abweichung der Betrachtung, Steamspy settl
 
 ### Median
 
-<<<<<<< HEAD
-The *middle value* of an (ordered) range of data. 
-=======
 - the *50% observation*
 - more resistant to outliers than the mean
 - example: D10 roll $X = {1, 1, 1, 1, 10}$
@@ -243,7 +240,6 @@ knitr::kable(sspy %>% filter(Price != "Free" & Owners.est > 5000) %>% select(Gam
 <!-- sorted by median playtime -->
 knitr::kable(sspy %>% filter(Price != "Free" & Owners.est > 5000) %>% select(Game, Owners.est, playtime_avg_h, playtime_med_h) %>% arrange(-playtime_med_h) %>% head(n=5))
 
->>>>>>> 55583ff89eb9104dd108f28a12dcf1a973783bc6
 
 ***
 
@@ -265,14 +261,9 @@ knitr::kable(sspy %>% filter(Price != "Free" & Owners.est > 5000) %>% select(Gam
 
 - Anscombe, Francis J. (1973) *Graphs in statistical analysis*. [American Statistician, 27, pp. 17–21.](http://www.sjsu.edu/faculty/gerstman/StatPrimer/anscombe1973.pdf)
 - four $x, y$ datasets which have equal properties:
-<<<<<<< HEAD
-    - mean, variance, correlation 
+    - mean (9, 7.5), variance (11, 4.12), correlation (0.816) 
     - linear regression: $y = 4 + 0.346x$
 - showcase for data exploration!
-=======
-    - mean (9, 7.5), variance (11, 4.12), correlation (0.816), linear regression ($y = 4 + 0.346x$)
-- showcase for data exploration
->>>>>>> 55583ff89eb9104dd108f28a12dcf1a973783bc6
 
 ***
 
