@@ -44,3 +44,5 @@ http://datascienceplus.com/standard-deviation-vs-standard-error/
 
 - Übungsblatt
 
+
+https://rawgit.com/juba/uniquanti/master/index.html

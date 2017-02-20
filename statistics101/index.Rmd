@@ -7,7 +7,7 @@ url         : {lib: "."}    # this is important for reveal.js
 framework   : revealjs      # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
-widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
+widgets     : [mathjax]     # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
 ---
@@ -111,6 +111,20 @@ dta.distance %>%
 
 ***
 
+### Probability Density Function
+
+> A function of a discrete variable whose integral over any interval is the probability that the variate specified by it will lie within that interval.  
+> [OED dictionary](https://en.oxforddictionaries.com/definition/probability_distribution)
+
+<!--
+- The area bounded by the curve of the density function and the x-axis is equal to 1, when computed over the domain of the variable.
+- The probability that a random variable assumes a value between a and b is equal to the area under the density function bounded by a and b. 
+-->
+
+--- &vertical
+
+## Density Functions and Distributions
+
 ### Uniform distribution
 
 ```{r uniform}
@@ -173,7 +187,14 @@ median, quartiles, Fehlererwartungen, Abweichung der Betrachtung, Steamspy settl
 
 ***
 
-### Mean and Standard Deviation
+### (Statistical) Mean 
+
+- the expected value
+- arithmetic mean: $1/n \sum x_i$ 
+
+***
+
+### Standard Deviation
 
 ![](./assets/img/Standard_deviation_diagram.svg)
 
@@ -181,12 +202,13 @@ median, quartiles, Fehlererwartungen, Abweichung der Betrachtung, Steamspy settl
 
 ### Median
 
+The *middle value* of an (ordered) range of data. 
+
 ***
 
 ### Others
 
 - quartiles
-- correlation
 
 
 --- &vertical
@@ -195,8 +217,8 @@ median, quartiles, Fehlererwartungen, Abweichung der Betrachtung, Steamspy settl
 
 - Anscombe, Francis J. (1973) *Graphs in statistical analysis*. [American Statistician, 27, pp. 17–21.](http://www.sjsu.edu/faculty/gerstman/StatPrimer/anscombe1973.pdf)
 - four $x, y$ datasets which have equal properties:
-    - mean, variance, correlation, linear regression
-    - $$y = 4 + 0.346x$$
+    - mean, variance, correlation 
+    - linear regression: $y = 4 + 0.346x$
 - showcase for data exploration!
 
 ***
@@ -228,9 +250,12 @@ anscombe.dta %>%
 > (Statistics) A quantity measuring the extent of the interdependence of variable quantities.  
 > [OED definition](https://en.oxforddictionaries.com/definition/correlation)
 
+> The action of causing something.  
+> [OED definition](https://en.oxforddictionaries.com/definition/causation)
+
 ***
 
-```{R correlation}
+```{R correlation, warning=FALSE, message=FALSE}
 # correlation
 
 cor.dta <- data.frame( 
@@ -251,10 +276,18 @@ gg
 
 ***
 
-```{R correlation-exposed}
+```{R correlation-exposed, warning=FALSE, message=FALSE}
 gg+
   geom_text(aes(x = 1, y = 9), label = "A=X+U[-1,1]\n B=X+U[-1,1]\n X~U[0,10]", hjust=0)
 ```
+
+---
+
+## Bayes' Rule
+
+$$p(A|B) = \frac{p(B|A)*p(A)}{p(B)}$$ 
+
+https://www.eecs.qmul.ac.uk/~norman/BBNs/Bayes_rule.htm
 
 ---
 
