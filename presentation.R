@@ -6,8 +6,8 @@
 
 library(slidify)
 
-#wd <- "D:/github/statistics101"
-wd <- path.expand("~/Documents/github/statistics101")
+#wd <- path.expand("~/Documents/github/statistics101")
+wd <- "C:/github/statistics101"
 setwd(wd)
 
 author("statistics101", use_git = FALSE)

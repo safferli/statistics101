@@ -77,3 +77,12 @@ median(dta.distance$minutes)
 
 
 
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,5 @@
 ---
-title       : Introduction to Statistics
+title       : Introduction to Statistics for Game Designers
 subtitle    : 
 author      : Christoph Safferling
 job         : Head of Game Analytics
@@ -13,9 +13,9 @@ knit        : slidify::knit2slides
 ---
 
 ```{r setup, include=FALSE}
-# golden ratio: 0.5*(1-sqrt(5))
+# golden ratio: 0.5*(1+sqrt(5))
 knitr::opts_chunk$set(fig.width=10, fig.asp=(2/(1+sqrt(5))))
-knitr::opts_chunk$set(echo=FALSE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ```{R preamble, include=FALSE}
@@ -23,11 +23,9 @@ options(bitmapType='cairo')
 options(scipen = 999)
 library(ggplot2)
 library(dplyr)
+library(tidyr)
+library(readr)
 set.seed(42)
-
-wd <- path.expand("~/Documents/github/statistics101")
-# commute dataset
-load(file.path(wd, "commute-distances.Rdata"))
 ```
 
 titlepage
@@ -64,20 +62,29 @@ involves methods of using information from a sample to draw conclusions about th
 
 - world's first statistics department at [University College London](https://www.ucl.ac.uk/statistics) in 1911
 - born in WW2: [S-Branch](http://www.economist.com/news/christmas-specials/21636589-how-statisticians-changed-war-and-war-changed-statistics-they-also-served)
-- RNG back then: lottery balls, and women picking "random" 
+- RNG back then: lottery balls, and women picking at "random" 
 
 <!-- The central office, the war cabinet was told, would produce "a regular series of figures on a coherent and well-ordered basis... that will be accepted and used without question". The new statisticians worked on government accounts; rationing (which ensured no Britons starved and greatly improved the diet of the poorest third); manpower surveys; the "pay as you earn"" system of taxation (which raised the cash needed to wage the war); and the Beveridge Report on social insurance that later led to the founding of the welfare state.
 -->
 
 --- &vertical
 
-## Distributions
+## From Historgrams to  Distributions
+
+### Graphs and Functions
 
 <!-- from histogram to distribution -->
 
-### Histogram
+Punktdiagramm zum Einstieg: Spielerlevel x, anzahl Gold y
+
+***
+
+### Histograms
 
 ```{R commute-hist, warning=FALSE, message=FALSE}
+# commute dataset
+load("../commute-distances.Rdata")
+
 # warning suppressed: non-finite values removed
 dta.distance %>% 
   #filter(minutes < 120) %>% 
@@ -132,12 +139,14 @@ dta.distance %>%
 x <- seq(-5, 5, by = 0.01)
 
 ggplot()+
-  # normal distribution
+  # uniform distribution
   geom_line(
     aes(x=x, y=dunif(x, -4, 4)), size = 1.5#, colour = cbgPalette[6]
   )+
   labs(x = "", y = "", title = "Uniform distribution")
 ```
+
+Beispielrechnung mit konkreten Zahlen: D6
 
 *** 
 
@@ -145,7 +154,7 @@ ggplot()+
 
 ```{r poisson}
 ggplot()+
-  # normal distribution
+  # poisson distribution
   geom_point(
     aes(x=unique(as.integer(x)), y=dpois(unique(as.integer(x)), 2)), size = 3.5#, colour = cbgPalette[2]
   )+
@@ -174,12 +183,10 @@ ggplot()+
 ## explain distributions
 
 - most (nice) distributions can be explained by *moments*
-    - mean (average)
-    - standard deviation/variance
+    - mean (average): $\mu = E[X]$
+    - standard deviation/variance: $\sigma = \sqrt{E[(X-\mu)^2]}$
+        - $\sigma = \sqrt{E[X^2] - (E[X])^2}$
 - for the Normal distribution: $$X \sim \mathcal{N}(\mu,\sigma^2)$$
-    - $\mu = E[X]$
-    - $\sigma = \sqrt{E[(X-\mu)^2]}$
-    - $\sigma = \sqrt{E[X^2] - (E[X])^2}$
 
 <!--
 median, quartiles, Fehlererwartungen, Abweichung der Betrachtung, Steamspy settlers data
@@ -202,13 +209,54 @@ median, quartiles, Fehlererwartungen, Abweichung der Betrachtung, Steamspy settl
 
 ### Median
 
+<<<<<<< HEAD
 The *middle value* of an (ordered) range of data. 
+=======
+- the *50% observation*
+- more resistant to outliers than the mean
+- example: D10 roll $X = {1, 1, 1, 1, 10}$
+    - mean: 2.8
+    - median: 1
+
+***
+
+```{r median-steamspy, message = FALSE}
+f.sum.sec <- function(t){
+  time <- strsplit(trimws(t), split = ":")
+  sapply(time, function(x){tt <- as.integer(x); return((tt[1]*60+tt[2])/3600)})
+}
+
+sspy <- readr::read_csv("../steamspy-2016-chart.csv") %>% 
+  setNames(make.names(names(.))) %>% 
+  tidyr::separate(Playtime..Median., c("playtime_avg", "playtime_med"), sep = "\\(", remove = FALSE) %>% 
+  tidyr::separate(Owners, c("Owners.est", "Owners.CI"), sep = " ", remove = FALSE) %>% 
+  mutate(
+    playtime_avg_h = f.sum.sec(playtime_avg),
+    playtime_med_h = f.sum.sec(gsub(")", "", playtime_med)),
+    Owners.est = as.integer(gsub(",", "", Owners.est))
+  )
+```
+
+<!-- sorted by avg playtime -->
+knitr::kable(sspy %>% filter(Price != "Free" & Owners.est > 5000) %>% select(Game, Owners.est, playtime_avg_h, playtime_med_h) %>% arrange(-playtime_avg_h) %>% head(n=5))
+
+<!-- sorted by median playtime -->
+knitr::kable(sspy %>% filter(Price != "Free" & Owners.est > 5000) %>% select(Game, Owners.est, playtime_avg_h, playtime_med_h) %>% arrange(-playtime_med_h) %>% head(n=5))
+
+>>>>>>> 55583ff89eb9104dd108f28a12dcf1a973783bc6
 
 ***
 
 ### Others
 
 - quartiles
+
+***
+
+### summary
+
+- mean, variance, median, lognormal (tail distributions in games)
+- the density curve is always preferable to a moment! 
 
 
 --- &vertical
@@ -217,9 +265,14 @@ The *middle value* of an (ordered) range of data.
 
 - Anscombe, Francis J. (1973) *Graphs in statistical analysis*. [American Statistician, 27, pp. 17–21.](http://www.sjsu.edu/faculty/gerstman/StatPrimer/anscombe1973.pdf)
 - four $x, y$ datasets which have equal properties:
+<<<<<<< HEAD
     - mean, variance, correlation 
     - linear regression: $y = 4 + 0.346x$
 - showcase for data exploration!
+=======
+    - mean (9, 7.5), variance (11, 4.12), correlation (0.816), linear regression ($y = 4 + 0.346x$)
+- showcase for data exploration
+>>>>>>> 55583ff89eb9104dd108f28a12dcf1a973783bc6
 
 ***
 
@@ -281,6 +334,12 @@ gg+
   geom_text(aes(x = 1, y = 9), label = "A=X+U[-1,1]\n B=X+U[-1,1]\n X~U[0,10]", hjust=0)
 ```
 
+***
+
+### Bayes' Rule
+
+- asdf
+
 ---
 
 ## Bayes' Rule
@@ -304,12 +363,29 @@ $$y_i = \beta_0 + \beta_i + \varepsilon_i$$
 - statistical difference/significance
     - show how two data dots come from the same distribution and can be different
     - t-test 
+- representative Stichprobe, zB hohe level, wenig Spieler, Ausreisser/Verzerrung
 
+---
+
+## common mistakes
+
+- filtern nach sample
+    - filter bias
+- samples have too few players
+    - outliers (also: cheats)
+- avg vs mean (steamspy)
+    - distributions are important(!)
+- correlation is not causation
+- summing of data over variables (levels)
+    - lower levels have more players, so sums are much(!) larger
+- self-selection
+- check validity of data
+    - check for cheats
 
 
 ---
 
-
+<!--
 Lesson 1: Visualizing relationships in data
 
 Seeing relationships in data and predicting based on them; Simpson's paradox
@@ -329,9 +405,7 @@ Lesson 6: Regression
 
 Linear regression; correlation
 Lesson 7: Final Exam
-
-
----
+-->
 
 
 
