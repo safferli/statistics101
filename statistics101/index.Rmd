@@ -25,6 +25,7 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 library(readr)
+library(knitr)
 set.seed(42)
 ```
 
