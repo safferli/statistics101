@@ -12,21 +12,9 @@ mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
 ---
 
-```{r setup, include=FALSE}
-# golden ratio: 0.5*(1+sqrt(5))
-knitr::opts_chunk$set(fig.width=10, fig.asp=(2/(1+sqrt(5))))
-knitr::opts_chunk$set(echo = FALSE)
-```
 
-```{R preamble, include=FALSE}
-options(bitmapType='cairo')
-options(scipen = 999)
-library(ggplot2)
-library(dplyr)
-library(tidyr)
-library(readr)
-set.seed(42)
-```
+
+
 
 titlepage
 
@@ -81,40 +69,13 @@ Punktdiagramm zum Einstieg: Spielerlevel x, anzahl Gold y
 
 ### Histograms
 
-```{R commute-hist, warning=FALSE, message=FALSE}
-# commute dataset
-load("../commute-distances.Rdata")
-
-# warning suppressed: non-finite values removed
-dta.distance %>% 
-  #filter(minutes < 120) %>% 
-  ggplot()+
-  geom_histogram(aes(x=minutes))+
-  #geom_line(stat="density", aes(x=minutes), colour = "red")+
-  xlim(0, 100)+
-  labs(
-    title = "Commute time of BB DUS employees", 
-    y = NULL
-  )
-```
+![plot of chunk commute-hist](assets/fig/commute-hist-1.png)
 
 ***
 
 ### Density estimates
 
-```{R commute-hist-dens, warning=FALSE, message=FALSE}
-# warning suppressed: non-finite values removed
-dta.distance %>% 
-  #filter(minutes < 120) %>% 
-  ggplot()+
-  geom_histogram(aes(x=minutes, y=..density..))+
-  geom_line(stat="density", aes(x=minutes), colour = "red")+
-  xlim(0, 100)+
-  labs(
-    title = "Commute time of BB DUS employees", 
-    y = NULL
-  )
-```
+![plot of chunk commute-hist-dens](assets/fig/commute-hist-dens-1.png)
 
 ***
 
@@ -135,17 +96,7 @@ dta.distance %>%
 
 ### Uniform distribution
 
-```{r uniform}
-# x values for plotting
-x <- seq(-5, 5, by = 0.01)
-
-ggplot()+
-  # uniform distribution
-  geom_line(
-    aes(x=x, y=dunif(x, -4, 4)), size = 1.5#, colour = cbgPalette[6]
-  )+
-  labs(x = "", y = "", title = "Uniform distribution")
-```
+![plot of chunk uniform](assets/fig/uniform-1.png)
 
 Beispielrechnung mit konkreten Zahlen: D6
 
@@ -153,31 +104,13 @@ Beispielrechnung mit konkreten Zahlen: D6
 
 ### Poisson (Count) distribution
 
-```{r poisson}
-ggplot()+
-  # poisson distribution
-  geom_point(
-    aes(x=unique(as.integer(x)), y=dpois(unique(as.integer(x)), 2)), size = 3.5#, colour = cbgPalette[2]
-  )+
-  labs(x = "", y = "", title = "Poisson (Count) distribution")
-```
+![plot of chunk poisson](assets/fig/poisson-1.png)
 
 *** 
 
 ### Normal (Gaussian) distribution
 
-```{r gaussian}
-ggplot()+
-  # normal distribution
-  geom_line(
-    aes(x=x, y=dnorm(x)), size = 1.5#, colour = cbgPalette[6]
-  )+
-#   # lognormal distribution
-#   geom_line(
-#     aes(x=x, y=dlnorm(x)), size = 1.5, colour = cbgPalette[6]
-#   )+
-  labs(x = "", y = "", title = "(Standard-) Normal distribution")
-```
+![plot of chunk gaussian](assets/fig/gaussian-1.png)
 
 
 --- &vertical
@@ -219,22 +152,7 @@ median, quartiles, Fehlererwartungen, Abweichung der Betrachtung, Steamspy settl
 
 ***
 
-```{r median-steamspy, message = FALSE}
-f.sum.sec <- function(t){
-  time <- strsplit(trimws(t), split = ":")
-  sapply(time, function(x){tt <- as.integer(x); return((tt[1]*60+tt[2])/3600)})
-}
 
-sspy <- readr::read_csv("../steamspy-2016-chart.csv") %>% 
-  setNames(make.names(names(.))) %>% 
-  tidyr::separate(Playtime..Median., c("playtime_avg", "playtime_med"), sep = "\\(", remove = FALSE) %>% 
-  tidyr::separate(Owners, c("Owners.est", "Owners.CI"), sep = " ", remove = FALSE) %>% 
-  mutate(
-    playtime_avg_h = f.sum.sec(playtime_avg),
-    playtime_med_h = f.sum.sec(gsub(")", "", playtime_med)),
-    Owners.est = as.integer(gsub(",", "", Owners.est))
-  )
-```
 
 <!-- sorted by avg playtime -->
 knitr::kable(sspy %>% filter(Price != "Free" & Owners.est > 5000) %>% select(Game, Owners.est, playtime_avg_h, playtime_med_h) %>% arrange(-playtime_avg_h) %>% head(n=5))
@@ -269,24 +187,7 @@ knitr::kable(sspy %>% filter(Price != "Free" & Owners.est > 5000) %>% select(Gam
 
 ***
 
-```{r anscombe}
-anscombe.dta <- NULL
-for(i in 1:4){
-  anscombe.dta <- bind_rows(
-    anscombe.dta, tibble(anscombe.set = letters[i], x = anscombe[, i], y = anscombe[, i+4])
-  )
-}
-
-anscombe.dta %>% 
-  ggplot(aes(x, y))+
-  geom_point()+
-  geom_smooth(method = "lm", se = FALSE)+
-  facet_grid(. ~ anscombe.set)+
-  labs(
-    x = "x-values", y = "y-values", title = "Anscombe's Quartet"
-  )
-
-```
+![plot of chunk anscombe](assets/fig/anscombe-1.png)
 
 
 --- &vertical
@@ -296,9 +197,7 @@ anscombe.dta %>%
 https://www.autodeskresearch.com/publications/samestats
 https://github.com/stephlocke/datasauRus
 
-```{R datasaurus, include=FALSE}
-library(datasauRus)
-```
+
 
 
 --- &vertical
@@ -313,31 +212,11 @@ library(datasauRus)
 
 ***
 
-```{R correlation, warning=FALSE, message=FALSE}
-# correlation
-
-cor.dta <- data.frame( 
-  x = runif(100, min = 0, max = 10)
-) %>% 
-  mutate(
-    a = x + runif(100, -1, 1), 
-    b = x + runif(100, -1, 1)
-  )
-
-gg <- ggplot(cor.dta)+
-  geom_point()+
-  aes(x=a, y=b)+
-  geom_smooth()+
-  labs(x=NULL, y=NULL, title = "Scatterplot of A and B")
-gg
-```
+![plot of chunk correlation](assets/fig/correlation-1.png)
 
 ***
 
-```{R correlation-exposed, warning=FALSE, message=FALSE}
-gg+
-  geom_text(aes(x = 1, y = 9), label = "A=X+U[-1,1]\n B=X+U[-1,1]\n X~U[0,10]", hjust=0)
-```
+![plot of chunk correlation-exposed](assets/fig/correlation-exposed-1.png)
 
 ***
 
