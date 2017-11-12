@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Introduction to Statistics for Game Designers</title>
+  <meta name="description" content="">
+  <meta name="author" content="Christoph Safferling">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="stylesheet" href="./frameworks/revealjs/css/reveal.min.css">
+  <link rel="stylesheet" href="./frameworks/revealjs/css/theme/default.css" id="theme">
+  <link rel="stylesheet" href="./highlighters/highlight.js/css/tomorrow.css" id="theme">
+  <!--[if lt IE 9]>
+  <script src="lib/js/html5shiv.js"></script>
+  <![endif]-->  <link rel="stylesheet" href = "assets/css/ribbons.css">
+<link rel="stylesheet" href = "assets/css/ubi.css">
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section class='' data-state='intro' id='slide-1'>
+  
+  <!-- adjust background for "intro" slides -->
+
+<style>
+html.intro body {
+background:url("./assets/img/ubi-background.jpg");
+background-position:center;
+background-size: 100%;
+} 
+
+html.thanks body {
+background:url("./assets/img/thanks-reel.png");
+background-position:center;
+background-repeat: no-repeat;
+background-size: contain;
+} 
+</style>
+
+<p style="color: #13DAEC; font-family: 'Lato', sans-serif; font-size: 150%; margin: 0 0 10% 0;">
+  Statistics 101<br />
+  <span style="font-size: 80%;">A brief overview with Game Design examples</span>
+</p>
+
+<p style="font-size: 100%; color: #000000;">
+  Christoph Safferling
+</p>
+
+<p style="font-size: 80%; margin: 3% 0 0 0; color: #222222;">
+  Head of Game Analytics and User Research<br/ > 
+  Ubisoft Blue Byte
+</p>
+
+<!-- fuck CSS... why can't I include this in a custom CSS? -->
+
+<style>
+.reveal {color: #231F20;}
+.reveal h2, .reveal h3 {color: #222222;}
+</style>
+
+<style>
+.gif150
+{
+  width: 150%;
+  height: auto;
+}
+</style>
+
+</section>
+<section>
+   <section class='' data-state=''>
+    <h2>Statistics</h2>
+    <blockquote>
+<p>The practice or science of collecting and analysing numerical data in large quantities, especially for the purpose of inferring proportions in a whole from those in a representative sample.<br>
+<a href="http://www.oxforddictionaries.com/definition/english/statistics">OED definition</a></p>
+</blockquote>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+   <section class='' data-state=''>
+    <blockquote>
+<p>Statistics is the study of the collection, analysis, interpretation, presentation, and organization of data.<br>
+<a href="https://global.oup.com/academic/product/the-oxford-dictionary-of-statistical-terms-9780199206131?cc=de&amp;lang=en&amp;">The Oxford Dictionary of Statistical Terms</a></p>
+</blockquote>
+
+<!--
+* *Descriptive statistics*
+involves methods of organizing, picturing and summarizing information from data.  
+* *Inferential statistics*
+involves methods of using information from a sample to draw conclusions about the population.
+-->
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+   <section class='' data-state=''>
+    <h2>Randomness</h2>
+
+<blockquote>
+<p>The quality or state of lacking a pattern or principle of organization; unpredictability<br>
+<a href="http://www.oxforddictionaries.com/definition/english/randomness">OED definition</a></p>
+</blockquote>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+</section>
+<section class='' data-state='' id='slide-3'>
+  <h2>History</h2>
+  <ul>
+<li>world&#39;s first statistics department at University College London (<a href="https://www.ucl.ac.uk/statistics">UCL</a>) in 1911</li>
+<li>born in WW2: <a href="http://www.economist.com/news/christmas-specials/21636589-how-statisticians-changed-war-and-war-changed-statistics-they-also-served">S-Branch</a></li>
+<li>RNG: lottery balls, and women picking at &quot;random&quot; </li>
+</ul>
+
+<!-- The central office, the war cabinet was told, would produce "a regular series of figures on a coherent and well-ordered basis... that will be accepted and used without question". The new statisticians worked on government accounts; rationing (which ensured no Britons starved and greatly improved the diet of the poorest third); manpower surveys; the "pay as you earn"" system of taxation (which raised the cash needed to wage the war); and the Beveridge Report on social insurance that later led to the founding of the welfare state.
+-->
+
+</section>
+<section>
+   <section class='' data-state=''>
+    <h2>From Histograms to  Distributions</h2>
+    <h3>Graphs and Functions</h3>
+
+<!-- from histogram to distribution -->
+
+<p>Punktdiagramm zum Einstieg: Spielerlevel x, anzahl Gold y</p>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+   <section class='' data-state=''>
+    <h3>Histograms</h3>
+
+<pre><code class="r"># commute dataset
+load(&quot;../commute-distances.Rdata&quot;)
+
+# warning suppressed: non-finite values removed
+dta.distance %&gt;% 
+  #filter(minutes &lt; 120) %&gt;% 
+  ggplot()+
+  geom_histogram(aes(x=minutes))+
+  #geom_line(stat=&quot;density&quot;, aes(x=minutes), colour = &quot;red&quot;)+
+  xlim(0, 100)+
+  labs(
+    title = &quot;Commute time of BB DUS employees&quot;, 
+    y = NULL
+  )
+</code></pre>
+
+<p><img src="assets/fig/commute-hist-1.png" alt="plot of chunk commute-hist"></p>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+   <section class='' data-state=''>
+    <h3>Density estimates</h3>
+
+<pre><code class="r"># warning suppressed: non-finite values removed
+dta.distance %&gt;% 
+  #filter(minutes &lt; 120) %&gt;% 
+  ggplot()+
+  geom_histogram(aes(x=minutes, y=..density..))+
+  geom_line(stat=&quot;density&quot;, aes(x=minutes), colour = &quot;red&quot;, size = 2)+
+  xlim(0, 100)+
+  labs(
+    title = &quot;Commute time of BB DUS employees&quot;, 
+    y = NULL
+  )
+</code></pre>
+
+<p><img src="assets/fig/commute-hist-dens-1.png" alt="plot of chunk commute-hist-dens"></p>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+   <section class='' data-state=''>
+    <h3>Probability Density Function</h3>
+
+<blockquote>
+<p>A function of a discrete variable whose integral over any interval is the probability that the variate specified by it will lie within that interval.<br>
+<a href="https://en.oxforddictionaries.com/definition/probability_distribution">OED dictionary</a></p>
+</blockquote>
+
+<!--
+- The area bounded by the curve of the density function and the x-axis is equal to 1, when computed over the domain of the variable.
+- The probability that a random variable assumes a value between a and b is equal to the area under the density function bounded by a and b. 
+-->
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+</section>
+<section>
+   <section class='' data-state=''>
+    <h2>Density Functions and Distributions</h2>
+    <h3>Uniform distribution</h3>
+
+<pre><code class="r"># x values for plotting
+x &lt;- seq(1, 6, by = 1)
+
+ggplot()+
+  # uniform distribution
+  geom_bar(
+    aes(x=x, y = (..count..)/sum(..count..)), size = 1.5#, colour = cbgPalette[6]
+  )+
+  labs(x = &quot;&quot;, y = &quot;&quot;, title = &quot;Uniform distribution&quot;, subtitle = &quot;A D6 die roll&quot;)+
+  # theme(
+  #   axis.text.y = element_blank(),
+  #   axis.ticks.y = element_blank()
+  # )+
+  scale_x_continuous(breaks = 1:6)#+
+</code></pre>
+
+<p><img src="assets/fig/uniform-1.png" alt="plot of chunk uniform"></p>
+
+<pre><code class="r">  #scale_y_continuous(labels = percent)
+</code></pre>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+   <section class='' data-state=''>
+    <h3>Poisson (Count) distribution</h3>
+
+<pre><code class="r">ggplot()+
+  # poisson distribution
+  geom_point(
+    aes(x=unique(as.integer(x)), y=dpois(unique(as.integer(x)), 2)), size = 3.5#, colour = cbgPalette[2]
+  )+
+  labs(x = &quot;&quot;, y = &quot;&quot;, title = &quot;Poisson (Count) distribution&quot;)
+</code></pre>
+
+<p><img src="assets/fig/poisson-1.png" alt="plot of chunk poisson"></p>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+   <section class='' data-state=''>
+    <h3>Normal (Gaussian) distribution</h3>
+
+<pre><code class="r">x &lt;- seq(-5, 5, by = 0.01)
+ggplot()+
+  # normal distribution
+  geom_line(
+    aes(x=x, y=dnorm(x)), size = 1.5#, colour = cbgPalette[6]
+  )+
+#   # lognormal distribution
+#   geom_line(
+#     aes(x=x, y=dlnorm(x)), size = 1.5, colour = cbgPalette[6]
+#   )+
+  labs(x = &quot;&quot;, y = &quot;&quot;, title = &quot;(Standard-) Normal distribution&quot;)
+</code></pre>
+
+<p><img src="assets/fig/gaussian-1.png" alt="plot of chunk gaussian"></p>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+</section>
+<section>
+   <section class='' data-state=''>
+    <h2>explain distributions</h2>
+    <ul>
+<li>most (nice) distributions can be explained by <em>moments</em>
+
+<ul>
+<li>mean (average): \(\mu = E[X]\)</li>
+<li>standard deviation/variance: 
+\[\sigma^2 = E[(X-\mu)^2]\] </li>
+</ul></li>
+<li>for the Normal distribution: \[X \sim \mathcal{N}(\mu,\sigma^2)\]</li>
+</ul>
+
+<!--
+median, quartiles, Fehlererwartungen, Abweichung der Betrachtung, Steamspy settlers data
+$\sigma = \sqrt{E[X^2] - (E[X])^2}$
+-->
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+   <section class='' data-state=''>
+    <h3>(Statistical) Mean</h3>
+
+<ul>
+<li>the expected value</li>
+<li>arithmetic mean: \(1/n \sum x_i\) </li>
+</ul>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+   <section class='' data-state=''>
+    <h3>Standard Deviation</h3>
+
+<p><img src="assets/img/Standard_deviation_diagram.svg" class="gif150" /></p>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+   <section class='' data-state=''>
+    <h3>Median</h3>
+
+<ul>
+<li>the <em>50% observation</em></li>
+<li>more resistant to outliers than the mean</li>
+<li>example: D10 roll \(X = {1, 1, 1, 1, 10}\)
+
+<ul>
+<li>mean: 2.8</li>
+<li>median: 1</li>
+</ul></li>
+</ul>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+   <section class='' data-state=''>
+    <h3>Steamspy data: by average</h3>
+
+<pre><code class="r">#&lt;!-- sorted by avg playtime --&gt;
+sspy %&gt;% 
+  filter(Price != &quot;Free&quot; &amp; Owners.est &gt; 5000) %&gt;% 
+  select(Game, Owners.est, playtime_avg_h, playtime_med_h) %&gt;% 
+  arrange(-playtime_avg_h) %&gt;% 
+  head(n=5) %&gt;% 
+  kable(&quot;html&quot;) %&gt;% 
+  kable_styling(font_size = 20) %&gt;% 
+  row_spec(0, bold = TRUE)
+</code></pre>
+
+<table class="table" style="font-size: 20px; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;"> Game </th>
+   <th style="text-align:right;font-weight: bold;"> Owners.est </th>
+   <th style="text-align:right;font-weight: bold;"> playtime_avg_h </th>
+   <th style="text-align:right;font-weight: bold;"> playtime_med_h </th>
+  </tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;"> Livelock </td>
+   <td style="text-align:right;"> 7142 </td>
+   <td style="text-align:right;"> 4.558333 </td>
+   <td style="text-align:right;"> 0.0358333 </td>
+  </tr>
+<tr>
+<td style="text-align:left;"> Out of the Park Baseball 17 </td>
+   <td style="text-align:right;"> 15384 </td>
+   <td style="text-align:right;"> 2.574167 </td>
+   <td style="text-align:right;"> 0.6594444 </td>
+  </tr>
+<tr>
+<td style="text-align:left;"> NOBUNAGA'S AMBITION: Souzou SengokuRisshiden </td>
+   <td style="text-align:right;"> 42855 </td>
+   <td style="text-align:right;"> 2.213889 </td>
+   <td style="text-align:right;"> 1.1980556 </td>
+  </tr>
+<tr>
+<td style="text-align:left;"> INFRA </td>
+   <td style="text-align:right;"> 9340 </td>
+   <td style="text-align:right;"> 2.129444 </td>
+   <td style="text-align:right;"> 0.0566667 </td>
+  </tr>
+<tr>
+<td style="text-align:left;"> Naval Action </td>
+   <td style="text-align:right;"> 84977 </td>
+   <td style="text-align:right;"> 1.594444 </td>
+   <td style="text-align:right;"> 0.2552778 </td>
+  </tr>
+</tbody>
+</table>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+   <section class='' data-state=''>
+    <h3>Steamspy data: by median</h3>
+
+<pre><code class="r">#&lt;!-- sorted by median playtime --&gt;
+sspy %&gt;% 
+  filter(Price != &quot;Free&quot; &amp; Owners.est &gt; 5000) %&gt;% 
+  select(Game, Owners.est, playtime_avg_h, playtime_med_h) %&gt;% 
+  arrange(-playtime_med_h) %&gt;% 
+  head(n=5) %&gt;% 
+  kable(&quot;html&quot;) %&gt;% 
+  kable_styling(font_size = 20) %&gt;% 
+  row_spec(0, bold = TRUE)
+</code></pre>
+
+<table class="table" style="font-size: 20px; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;"> Game </th>
+   <th style="text-align:right;font-weight: bold;"> Owners.est </th>
+   <th style="text-align:right;font-weight: bold;"> playtime_avg_h </th>
+   <th style="text-align:right;font-weight: bold;"> playtime_med_h </th>
+  </tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;"> NOBUNAGA'S AMBITION: Souzou SengokuRisshiden </td>
+   <td style="text-align:right;"> 42855 </td>
+   <td style="text-align:right;"> 2.213889 </td>
+   <td style="text-align:right;"> 1.1980556 </td>
+  </tr>
+<tr>
+<td style="text-align:left;"> DARK SOULS III </td>
+   <td style="text-align:right;"> 1067158 </td>
+   <td style="text-align:right;"> 1.128333 </td>
+   <td style="text-align:right;"> 0.8391667 </td>
+  </tr>
+<tr>
+<td style="text-align:left;"> Tom Clancy's The Division </td>
+   <td style="text-align:right;"> 784206 </td>
+   <td style="text-align:right;"> 1.528056 </td>
+   <td style="text-align:right;"> 0.8344444 </td>
+  </tr>
+<tr>
+<td style="text-align:left;"> Hearts of Iron IV </td>
+   <td style="text-align:right;"> 338077 </td>
+   <td style="text-align:right;"> 1.159722 </td>
+   <td style="text-align:right;"> 0.6947222 </td>
+  </tr>
+<tr>
+<td style="text-align:left;"> Ascent - The Space Game </td>
+   <td style="text-align:right;"> 17032 </td>
+   <td style="text-align:right;"> 1.081944 </td>
+   <td style="text-align:right;"> 0.6894444 </td>
+  </tr>
+</tbody>
+</table>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+   <section class='' data-state=''>
+    <h3>summary</h3>
+
+<ul>
+<li>mean, variance, median, (log-)normal</li>
+<li>game data often has a large tail distribution</li>
+<li>the density curve is always preferable to a moment </li>
+</ul>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+</section>
+<section>
+   <section class='' data-state=''>
+    <h2>Bonus: Anscombe&#39;s Quartet</h2>
+    <ul>
+<li>Anscombe, Francis J. (1973) <em>Graphs in statistical analysis</em>. <a href="http://www.sjsu.edu/faculty/gerstman/StatPrimer/anscombe1973.pdf">American Statistician, 27, pp. 17–21.</a></li>
+<li>four \(x, y\) datasets which have equal properties:
+
+<ul>
+<li>mean \((9, 7.5)\), variance \((11, 4.12)\), correlation \((0.816)\) </li>
+<li>linear regression: \(y = 4 + 0.346x\)</li>
+</ul></li>
+<li>showcase for data exploration!</li>
+</ul>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+   <section class='' data-state=''>
+    <pre><code class="r">anscombe.dta &lt;- NULL
+for(i in 1:4){
+  anscombe.dta &lt;- bind_rows(
+    anscombe.dta, tibble(anscombe.set = letters[i], x = anscombe[, i], y = anscombe[, i+4])
+  )
+}
+
+anscombe.dta %&gt;% 
+  ggplot(aes(x, y))+
+  geom_point()+
+  geom_smooth(method = &quot;lm&quot;, se = FALSE)+
+  facet_grid(. ~ anscombe.set)+
+  labs(
+    x = &quot;x-values&quot;, y = &quot;y-values&quot;, title = &quot;Anscombe&#39;s Quartet&quot;
+  )
+</code></pre>
+
+<p><img src="assets/fig/anscombe-1.png" alt="plot of chunk anscombe"></p>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+</section>
+<section>
+   <section class='' data-state=''>
+    <h2>Correlation vs Causation</h2>
+    <blockquote>
+<p>(Statistics) A quantity measuring the extent of the interdependence of variable quantities.<br>
+<a href="https://en.oxforddictionaries.com/definition/correlation">OED definition</a></p>
+</blockquote>
+
+<!-- -->
+
+<blockquote>
+<p>The action of causing something.<br>
+<a href="https://en.oxforddictionaries.com/definition/causation">OED definition</a></p>
+</blockquote>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+   <section class='' data-state=''>
+    <pre><code class="r"># correlation
+
+cor.dta &lt;- data.frame( 
+  x = runif(100, min = 0, max = 10)
+) %&gt;% 
+  mutate(
+    a = x + runif(100, -1, 1), 
+    b = x + runif(100, -1, 1)
+  )
+
+gg &lt;- ggplot(cor.dta)+
+  geom_point()+
+  aes(x=a, y=b)+
+  geom_smooth()+
+  labs(x=NULL, y=NULL, title = &quot;Scatterplot of A and B&quot;)
+gg
+</code></pre>
+
+<p><img src="assets/fig/correlation-1.png" alt="plot of chunk correlation"></p>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+   <section class='' data-state=''>
+    <pre><code class="r">gg+
+  geom_text(aes(x = 1, y = 9), label = &quot;A=X+U[-1,1]\n B=X+U[-1,1]\n X~U[0,10]&quot;, hjust=0)
+</code></pre>
+
+<p><img src="assets/fig/correlation-exposed-1.png" alt="plot of chunk correlation-exposed"></p>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+</section>
+<section>
+   <section class='' data-state=''>
+    <h2>Bayes&#39; Rule</h2>
+    <ul>
+<li>conditional probability</li>
+<li><em>prior</em> and <em>posterior</em> knowledge</li>
+<li>assume: 
+
+<ul>
+<li>\(p(A) = \text{prob of a payer} = 0.05\)</li>
+<li>\(p(B) = \text{prob of pvp} = 0.2\)</li>
+<li>\(p(B|A) = 0.8\)</li>
+</ul></li>
+</ul>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+   <section class='' data-state=''>
+    <ul>
+<li>how high is the chance of a player being a payer, given that he plays PvP? </li>
+</ul>
+
+<p>\[p(A|B) = \frac{p(B|A)*p(A)}{p(B)}\] </p>
+
+<!--
+answer: 0.8*0.05/0.2 = 0.2 > 0.05
+
+tests: number of false positives outweights true positives
+
+https://www.eecs.qmul.ac.uk/~norman/BBNs/Bayes_rule.htm
+-->
+
+<!--
+---
+
+## Linear Regression
+
+$$y_i = \beta_0 + \beta_i + \varepsilon_i$$
+
+- fitted values: $$\hat y = b_0 + b_ix_i$$
+- residuals: $$e_i = y_i - \hat y_i$$
+
+-->
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+</section>
+<section>
+   <section class='' data-state=''>
+    <h2>Statistical tests</h2>
+    <ul>
+<li>statistical difference/significance
+
+<ul>
+<li>show how two data dots come from the same distribution and can be different</li>
+</ul></li>
+<li>representative sample
+
+<ul>
+<li>high levels, few players, biases</li>
+<li>self-selection! </li>
+</ul></li>
+<li>validity of a test
+
+<ul>
+<li>Type I error: reject true Null (&quot;false positive&quot;)</li>
+<li>Type II error: do not reject false Null (&quot;false negative&quot;)</li>
+</ul></li>
+</ul>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+   <section class='' data-state=''>
+    <pre><code class="r">ggplot()+
+  geom_line(aes(x = d1, y = dnorm(d1)), size = 2, colour = &quot;#16A085&quot;)+
+  annotate(&quot;text&quot;, x = -2.5, y = 0.12, label = &quot;d1 == N(-1.5, 0)&quot;, colour = &quot;#6ACEEB&quot;, parse = TRUE)+
+  geom_line(aes(x = d1, y = dnorm(d1+1.5)), size = 2, colour = &quot;#6ACEEB&quot;)+
+  annotate(&quot;text&quot;, x = -2, y = 0.01, label = &quot;d2 == N(0, 0)&quot;, colour = &quot;#16A085&quot;, parse = TRUE)+
+  geom_vline(xintercept = -0.5)+
+  annotate(&quot;text&quot;, x = -0.45, y = 0.01, label = &quot;x = -0.5&quot;, hjust = 0)+
+  labs(
+    x = &quot;&quot;, y = &quot;density&quot;,
+    title = &quot;Is x from distribution d1 or d2?&quot;
+  )
+</code></pre>
+
+<p><img src="assets/fig/ttests-1.png" alt="plot of chunk ttests"></p>
+
+    <aside class='notes'>
+      
+    </aside>
+   </section>
+</section>
+<section class='' data-state='' id='slide-11'>
+  <h2>common mistakes</h2>
+  <ul>
+<li>check validity of data (cheats/QA)</li>
+<li>filter bias</li>
+<li>samples may have too few players</li>
+<li>outliers <em>will</em> happen (also: cheats)</li>
+<li>avg vs mean (steamspy)
+
+<ul>
+<li>distributions are important!</li>
+</ul></li>
+<li>summing of data over variables (levels)
+
+<ul>
+<li>lower levels have more players, so sums are much(!) larger</li>
+</ul></li>
+<li>correlation is not causation</li>
+<li>self-selection</li>
+</ul>
+
+</section>
+<section class='' data-state='thanks' id='slide-12'>
+  <h2>Happy stat-ing!</h2>
+  <!--
+Lesson 1: Visualizing relationships in data
+
+Seeing relationships in data and predicting based on them; Simpson's paradox
+Lesson 2: Probability
+
+Probability; Bayes Rule; Correlation vs. Causation
+Lesson 3: Estimation
+
+Maximum Likelihood Estimation; Mean, Median, Mode; Standard Deviation, Variance
+Lesson 4: Outliers and Normal Distribution
+
+Outliers, Quartiles; Binomial Distribution; Central Limit Theorem; Manipulating Normal Distribution
+Lesson 5: Inference
+
+Confidence intervals; Hypothesis Testing
+Lesson 6: Regression
+
+Linear regression; correlation
+Lesson 7: Final Exam
+-->
+
+</section>
+    </div>
+  </div>
+</body>
+  <script src="./frameworks/revealjs/lib/js/head.min.js"></script>
+  <script src="./frameworks/revealjs/js/reveal.min.js"></script>
+  <script>
+  // Full list of configuration options available here:
+  // https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+    theme: Reveal.getQueryHash().theme || 'default', 
+    transition: Reveal.getQueryHash().transition || 'default', 
+    dependencies: [
+    // Cross-browser shim that fully implements classList -
+    // https://github.com/eligrey/classList.js/
+      { src: './frameworks/revealjs/lib/js/classList.js', condition: function() { return !document.body.classList;}},
+      // Zoom in and out with Alt+click
+      { src: './frameworks/revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+      // Speaker notes
+      { src: './frameworks/revealjs/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+      // Remote control your reveal.js presentation using a touch device
+      //{ src: './frameworks/revealjs/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+      ]
+  });
+  </script>  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+<script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="./widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+<script src="./highlighters/highlight.js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!-- DONE LOADING HIGHLIGHTER JS FILES -->
+ 
+
+</html>

@@ -14,24 +14,9 @@ revealjs:
     theme: default
 --- ds:intro
 
-```{r setup, include=FALSE}
-# golden ratio: 0.5*(1+sqrt(5))
-knitr::opts_chunk$set(fig.width=10, fig.asp=(2/(1+sqrt(5))))
-knitr::opts_chunk$set(echo = FALSE)
-```
 
-```{R preamble, include=FALSE}
-options(bitmapType='cairo')
-options(scipen = 999)
-library(ggplot2)
-library(dplyr)
-library(tidyr)
-library(readr)
-library(scales)
-library(knitr)
-library(kableExtra)
-set.seed(42)
-```
+
+
 
 <!-- adjust background for "intro" slides -->
 <style>
@@ -132,7 +117,8 @@ Punktdiagramm zum Einstieg: Spielerlevel x, anzahl Gold y
 
 ### Histograms
 
-```{R commute-hist, warning=FALSE, message=FALSE}
+
+```r
 # commute dataset
 load("../commute-distances.Rdata")
 
@@ -149,11 +135,14 @@ dta.distance %>%
   )
 ```
 
+![plot of chunk commute-hist](assets/fig/commute-hist-1.png)
+
 ***
 
 ### Density estimates
 
-```{R commute-hist-dens, warning=FALSE, message=FALSE}
+
+```r
 # warning suppressed: non-finite values removed
 dta.distance %>% 
   #filter(minutes < 120) %>% 
@@ -166,6 +155,8 @@ dta.distance %>%
     y = NULL
   )
 ```
+
+![plot of chunk commute-hist-dens](assets/fig/commute-hist-dens-1.png)
 
 ***
 
@@ -185,7 +176,8 @@ dta.distance %>%
 
 ### Uniform distribution
 
-```{r uniform}
+
+```r
 # x values for plotting
 x <- seq(1, 6, by = 1)
 
@@ -200,6 +192,11 @@ ggplot()+
   #   axis.ticks.y = element_blank()
   # )+
   scale_x_continuous(breaks = 1:6)#+
+```
+
+![plot of chunk uniform](assets/fig/uniform-1.png)
+
+```r
   #scale_y_continuous(labels = percent)
 ```
 
@@ -208,7 +205,8 @@ ggplot()+
 
 ### Poisson (Count) distribution
 
-```{r poisson}
+
+```r
 ggplot()+
   # poisson distribution
   geom_point(
@@ -217,11 +215,14 @@ ggplot()+
   labs(x = "", y = "", title = "Poisson (Count) distribution")
 ```
 
+![plot of chunk poisson](assets/fig/poisson-1.png)
+
 *** 
 
 ### Normal (Gaussian) distribution
 
-```{r gaussian}
+
+```r
 x <- seq(-5, 5, by = 0.01)
 ggplot()+
   # normal distribution
@@ -234,6 +235,8 @@ ggplot()+
 #   )+
   labs(x = "", y = "", title = "(Standard-) Normal distribution")
 ```
+
+![plot of chunk gaussian](assets/fig/gaussian-1.png)
 
 --- &vertical
 
@@ -275,26 +278,12 @@ $\sigma = \sqrt{E[X^2] - (E[X])^2}$
 
 ***
 
-```{r median-steamspy, message = FALSE, include = FALSE}
-f.sum.sec <- function(t){
-  time <- strsplit(trimws(t), split = ":")
-  sapply(time, function(x){tt <- as.integer(x); return((tt[1]*60+tt[2])/3600)})
-}
 
-sspy <- readr::read_csv("../steamspy-2016-chart.csv") %>% 
-  setNames(make.names(names(.))) %>% 
-  tidyr::separate(Playtime..Median., c("playtime_avg", "playtime_med"), sep = "\\(", remove = FALSE) %>% 
-  tidyr::separate(Owners, c("Owners.est", "Owners.CI"), sep = " ", remove = FALSE) %>% 
-  mutate(
-    playtime_avg_h = f.sum.sec(playtime_avg),
-    playtime_med_h = f.sum.sec(gsub(")", "", playtime_med)),
-    Owners.est = as.integer(gsub(",", "", Owners.est))
-  )
-```
 
 ### Steamspy data: by average
 
-```{r sspy-by-avg-playtime}
+
+```r
 #<!-- sorted by avg playtime -->
 sspy %>% 
   filter(Price != "Free" & Owners.est > 5000) %>% 
@@ -306,11 +295,53 @@ sspy %>%
   row_spec(0, bold = TRUE)
 ```
 
+<table class="table" style="font-size: 20px; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;"> Game </th>
+   <th style="text-align:right;font-weight: bold;"> Owners.est </th>
+   <th style="text-align:right;font-weight: bold;"> playtime_avg_h </th>
+   <th style="text-align:right;font-weight: bold;"> playtime_med_h </th>
+  </tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;"> Livelock </td>
+   <td style="text-align:right;"> 7142 </td>
+   <td style="text-align:right;"> 4.558333 </td>
+   <td style="text-align:right;"> 0.0358333 </td>
+  </tr>
+<tr>
+<td style="text-align:left;"> Out of the Park Baseball 17 </td>
+   <td style="text-align:right;"> 15384 </td>
+   <td style="text-align:right;"> 2.574167 </td>
+   <td style="text-align:right;"> 0.6594444 </td>
+  </tr>
+<tr>
+<td style="text-align:left;"> NOBUNAGA'S AMBITION: Souzou SengokuRisshiden </td>
+   <td style="text-align:right;"> 42855 </td>
+   <td style="text-align:right;"> 2.213889 </td>
+   <td style="text-align:right;"> 1.1980556 </td>
+  </tr>
+<tr>
+<td style="text-align:left;"> INFRA </td>
+   <td style="text-align:right;"> 9340 </td>
+   <td style="text-align:right;"> 2.129444 </td>
+   <td style="text-align:right;"> 0.0566667 </td>
+  </tr>
+<tr>
+<td style="text-align:left;"> Naval Action </td>
+   <td style="text-align:right;"> 84977 </td>
+   <td style="text-align:right;"> 1.594444 </td>
+   <td style="text-align:right;"> 0.2552778 </td>
+  </tr>
+</tbody>
+</table>
+
 ***
 
 ### Steamspy data: by median
 
-```{r sspy-by-median-playtime}
+
+```r
 #<!-- sorted by median playtime -->
 sspy %>% 
   filter(Price != "Free" & Owners.est > 5000) %>% 
@@ -321,6 +352,47 @@ sspy %>%
   kable_styling(font_size = 20) %>% 
   row_spec(0, bold = TRUE)
 ```
+
+<table class="table" style="font-size: 20px; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;font-weight: bold;"> Game </th>
+   <th style="text-align:right;font-weight: bold;"> Owners.est </th>
+   <th style="text-align:right;font-weight: bold;"> playtime_avg_h </th>
+   <th style="text-align:right;font-weight: bold;"> playtime_med_h </th>
+  </tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;"> NOBUNAGA'S AMBITION: Souzou SengokuRisshiden </td>
+   <td style="text-align:right;"> 42855 </td>
+   <td style="text-align:right;"> 2.213889 </td>
+   <td style="text-align:right;"> 1.1980556 </td>
+  </tr>
+<tr>
+<td style="text-align:left;"> DARK SOULS III </td>
+   <td style="text-align:right;"> 1067158 </td>
+   <td style="text-align:right;"> 1.128333 </td>
+   <td style="text-align:right;"> 0.8391667 </td>
+  </tr>
+<tr>
+<td style="text-align:left;"> Tom Clancy's The Division </td>
+   <td style="text-align:right;"> 784206 </td>
+   <td style="text-align:right;"> 1.528056 </td>
+   <td style="text-align:right;"> 0.8344444 </td>
+  </tr>
+<tr>
+<td style="text-align:left;"> Hearts of Iron IV </td>
+   <td style="text-align:right;"> 338077 </td>
+   <td style="text-align:right;"> 1.159722 </td>
+   <td style="text-align:right;"> 0.6947222 </td>
+  </tr>
+<tr>
+<td style="text-align:left;"> Ascent - The Space Game </td>
+   <td style="text-align:right;"> 17032 </td>
+   <td style="text-align:right;"> 1.081944 </td>
+   <td style="text-align:right;"> 0.6894444 </td>
+  </tr>
+</tbody>
+</table>
 
 ***
 
@@ -343,7 +415,8 @@ sspy %>%
 
 ***
 
-```{r anscombe}
+
+```r
 anscombe.dta <- NULL
 for(i in 1:4){
   anscombe.dta <- bind_rows(
@@ -359,8 +432,9 @@ anscombe.dta %>%
   labs(
     x = "x-values", y = "y-values", title = "Anscombe's Quartet"
   )
-
 ```
+
+![plot of chunk anscombe](assets/fig/anscombe-1.png)
 
 
 --- &vertical
@@ -377,7 +451,8 @@ anscombe.dta %>%
 
 ***
 
-```{R correlation, warning=FALSE, message=FALSE}
+
+```r
 # correlation
 
 cor.dta <- data.frame( 
@@ -396,12 +471,17 @@ gg <- ggplot(cor.dta)+
 gg
 ```
 
+![plot of chunk correlation](assets/fig/correlation-1.png)
+
 ***
 
-```{R correlation-exposed, warning=FALSE, message=FALSE}
+
+```r
 gg+
   geom_text(aes(x = 1, y = 9), label = "A=X+U[-1,1]\n B=X+U[-1,1]\n X~U[0,10]", hjust=0)
 ```
+
+![plot of chunk correlation-exposed](assets/fig/correlation-exposed-1.png)
 
 
 ---&vertical
@@ -456,7 +536,8 @@ $$y_i = \beta_0 + \beta_i + \varepsilon_i$$
 
 ***
 
-```{r ttests}
+
+```r
 ggplot()+
   geom_line(aes(x = d1, y = dnorm(d1)), size = 2, colour = "#16A085")+
   annotate("text", x = -2.5, y = 0.12, label = "d1 == N(-1.5, 0)", colour = "#6ACEEB", parse = TRUE)+
@@ -469,6 +550,8 @@ ggplot()+
     title = "Is x from distribution d1 or d2?"
   )
 ```
+
+![plot of chunk ttests](assets/fig/ttests-1.png)
 
 
 ---

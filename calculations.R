@@ -73,10 +73,20 @@ mean(dta.distance$minutes)
 median(dta.distance$minutes)
 
 
+d1 <- seq(-3, 3, 0.01)
 
-
-
-
+ggplot()+
+  geom_line(aes(x = d1, y = dnorm(d1)), size = 2, colour = "#16A085")+
+  annotate("text", x = -2.5, y = 0.12, label = "d1 == N(-1.5, 0)", colour = "#6ACEEB", parse = TRUE)+
+  geom_line(aes(x = d1, y = dnorm(d1+1.5)), size = 2, colour = "#6ACEEB")+
+  annotate("text", x = -2, y = 0.01, label = "d2 == N(0, 0)", colour = "#16A085", parse = TRUE)+
+  geom_vline(xintercept = -0.5)+
+  annotate("text", x = -0.45, y = 0.01, label = "x = -0.5", hjust = 0)+
+  labs(
+    x = "", y = "density",
+    title = "Is x from distribution d1 or d2?"
+  )
+  
 
 
 
