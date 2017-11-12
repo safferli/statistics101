@@ -27,9 +27,13 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 library(readr)
+<<<<<<< HEAD
 library(scales)
 library(knitr)
 library(kableExtra)
+=======
+library(knitr)
+>>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 set.seed(42)
 ```
 
@@ -81,16 +85,17 @@ background-size: contain;
 
 
 
+
 --- &vertical
 
 ## Statistics
 
-> The practice or science of collecting and analysing numerical data in large quantities, especially for the purpose of inferring proportions in a whole from those in a representative sample.  
+> The practice or science of collecting and analysing numerical data in large quantities, especially for the purpose of inferring proportions in a whole from those in a representative sample.   
 > [OED definition](http://www.oxforddictionaries.com/definition/english/statistics)
 
 ***
 
-> Statistics is the study of the collection, analysis, interpretation, presentation, and organization of data.  
+> Statistics is the study of the collection, analysis, interpretation, presentation, and organization of data.   
 > [The Oxford Dictionary of Statistical Terms](https://global.oup.com/academic/product/the-oxford-dictionary-of-statistical-terms-9780199206131?cc=de&lang=en&)
 
 <!--
@@ -115,16 +120,15 @@ involves methods of using information from a sample to draw conclusions about th
 - born in WW2: [S-Branch](http://www.economist.com/news/christmas-specials/21636589-how-statisticians-changed-war-and-war-changed-statistics-they-also-served)
 - RNG: lottery balls, and women picking at "random" 
 
-<!-- The central office, the war cabinet was told, would produce "a regular series of figures on a coherent and well-ordered basis... that will be accepted and used without question". The new statisticians worked on government accounts; rationing (which ensured no Britons starved and greatly improved the diet of the poorest third); manpower surveys; the "pay as you earn"" system of taxation (which raised the cash needed to wage the war); and the Beveridge Report on social insurance that later led to the founding of the welfare state.
+<!-- The central office, the war cabinet was told, would produce "a regular series of figures on a coherent and well-ordered basis... that will be accepted and used without question". The new statisticians worked on government accounts; rationing (which ensured no Britons starved and greatly improved the diet of the poorest third); manpower surveys; the "pay as you earn" system of taxation (which raised the cash needed to wage the war); and the Beveridge Report on social insurance that later led to the founding of the welfare state.
 -->
+
 
 --- &vertical
 
 ## From Histograms to  Distributions
 
 ### Graphs and Functions
-
-<!-- from histogram to distribution -->
 
 Punktdiagramm zum Einstieg: Spielerlevel x, anzahl Gold y
 
@@ -178,6 +182,7 @@ dta.distance %>%
 - The area bounded by the curve of the density function and the x-axis is equal to 1, when computed over the domain of the variable.
 - The probability that a random variable assumes a value between a and b is equal to the area under the density function bounded by a and b. 
 -->
+
 
 --- &vertical
 
@@ -234,6 +239,7 @@ ggplot()+
 #   )+
   labs(x = "", y = "", title = "(Standard-) Normal distribution")
 ```
+
 
 --- &vertical
 
@@ -360,6 +366,18 @@ anscombe.dta %>%
     x = "x-values", y = "y-values", title = "Anscombe's Quartet"
   )
 
+```
+
+
+--- &vertical
+
+## Bonus bonus: The Datasaurus
+
+https://www.autodeskresearch.com/publications/samestats
+https://github.com/stephlocke/datasauRus
+
+```{R datasaurus, include=FALSE}
+library(datasauRus)
 ```
 
 
