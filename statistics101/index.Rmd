@@ -27,13 +27,10 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 library(readr)
-<<<<<<< HEAD
 library(scales)
 library(knitr)
 library(kableExtra)
-=======
 library(knitr)
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 set.seed(42)
 ```
 
@@ -366,18 +363,6 @@ anscombe.dta %>%
     x = "x-values", y = "y-values", title = "Anscombe's Quartet"
   )
 
-```
-
-
---- &vertical
-
-## Bonus bonus: The Datasaurus
-
-https://www.autodeskresearch.com/publications/samestats
-https://github.com/stephlocke/datasauRus
-
-```{R datasaurus, include=FALSE}
-library(datasauRus)
 ```
 
 

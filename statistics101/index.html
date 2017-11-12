@@ -13,16 +13,12 @@
   <!--[if lt IE 9]>
   <script src="lib/js/html5shiv.js"></script>
   <![endif]-->  <link rel="stylesheet" href = "assets/css/ribbons.css">
-<<<<<<< HEAD
 <link rel="stylesheet" href = "assets/css/ubi.css">
-=======
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 
 </head>
 <body>
   <div class="reveal">
     <div class="slides">
-<<<<<<< HEAD
       <section class='' data-state='intro' id='slide-1'>
   
   <!-- adjust background for "intro" slides -->
@@ -70,11 +66,6 @@ background-size: contain;
   height: auto;
 }
 </style>
-=======
-      <section class='' data-state='' id='slide-1'>
-  
-  <p>titlepage</p>
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 
 </section>
 <section>
@@ -85,18 +76,12 @@ background-size: contain;
 <a href="http://www.oxforddictionaries.com/definition/english/statistics">OED definition</a></p>
 </blockquote>
 
-<<<<<<< HEAD
     <aside class='notes'>
       
     </aside>
    </section>
    <section class='' data-state=''>
     <blockquote>
-=======
-<!-- -->
-
-<blockquote>
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 <p>Statistics is the study of the collection, analysis, interpretation, presentation, and organization of data.<br>
 <a href="https://global.oup.com/academic/product/the-oxford-dictionary-of-statistical-terms-9780199206131?cc=de&amp;lang=en&amp;">The Oxford Dictionary of Statistical Terms</a></p>
 </blockquote>
@@ -128,21 +113,12 @@ involves methods of using information from a sample to draw conclusions about th
 <section class='' data-state='' id='slide-3'>
   <h2>History</h2>
   <ul>
-<<<<<<< HEAD
 <li>world&#39;s first statistics department at University College London (<a href="https://www.ucl.ac.uk/statistics">UCL</a>) in 1911</li>
 <li>born in WW2: <a href="http://www.economist.com/news/christmas-specials/21636589-how-statisticians-changed-war-and-war-changed-statistics-they-also-served">S-Branch</a></li>
 <li>RNG: lottery balls, and women picking at &quot;random&quot; </li>
 </ul>
 
-<!-- The central office, the war cabinet was told, would produce "a regular series of figures on a coherent and well-ordered basis... that will be accepted and used without question". The new statisticians worked on government accounts; rationing (which ensured no Britons starved and greatly improved the diet of the poorest third); manpower surveys; the "pay as you earn"" system of taxation (which raised the cash needed to wage the war); and the Beveridge Report on social insurance that later led to the founding of the welfare state.
-=======
-<li>world&#39;s first statistics department at <a href="https://www.ucl.ac.uk/statistics">University College London</a> in 1911</li>
-<li>born in WW2: <a href="http://www.economist.com/news/christmas-specials/21636589-how-statisticians-changed-war-and-war-changed-statistics-they-also-served">S-Branch</a></li>
-<li>RNG back then: lottery balls, and women picking at &quot;random&quot; </li>
-</ul>
-
 <!-- The central office, the war cabinet was told, would produce "a regular series of figures on a coherent and well-ordered basis... that will be accepted and used without question". The new statisticians worked on government accounts; rationing (which ensured no Britons starved and greatly improved the diet of the poorest third); manpower surveys; the "pay as you earn" system of taxation (which raised the cash needed to wage the war); and the Beveridge Report on social insurance that later led to the founding of the welfare state.
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 -->
 
 </section>
@@ -151,11 +127,6 @@ involves methods of using information from a sample to draw conclusions about th
     <h2>From Histograms to  Distributions</h2>
     <h3>Graphs and Functions</h3>
 
-<<<<<<< HEAD
-<!-- from histogram to distribution -->
-
-=======
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 <p>Punktdiagramm zum Einstieg: Spielerlevel x, anzahl Gold y</p>
 
     <aside class='notes'>
@@ -165,25 +136,6 @@ involves methods of using information from a sample to draw conclusions about th
    <section class='' data-state=''>
     <h3>Histograms</h3>
 
-<<<<<<< HEAD
-<pre><code class="r"># commute dataset
-load(&quot;../commute-distances.Rdata&quot;)
-
-# warning suppressed: non-finite values removed
-dta.distance %&gt;% 
-  #filter(minutes &lt; 120) %&gt;% 
-  ggplot()+
-  geom_histogram(aes(x=minutes))+
-  #geom_line(stat=&quot;density&quot;, aes(x=minutes), colour = &quot;red&quot;)+
-  xlim(0, 100)+
-  labs(
-    title = &quot;Commute time of BB DUS employees&quot;, 
-    y = NULL
-  )
-</code></pre>
-
-=======
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 <p><img src="assets/fig/commute-hist-1.png" alt="plot of chunk commute-hist"></p>
 
     <aside class='notes'>
@@ -193,22 +145,6 @@ dta.distance %&gt;%
    <section class='' data-state=''>
     <h3>Density estimates</h3>
 
-<<<<<<< HEAD
-<pre><code class="r"># warning suppressed: non-finite values removed
-dta.distance %&gt;% 
-  #filter(minutes &lt; 120) %&gt;% 
-  ggplot()+
-  geom_histogram(aes(x=minutes, y=..density..))+
-  geom_line(stat=&quot;density&quot;, aes(x=minutes), colour = &quot;red&quot;, size = 2)+
-  xlim(0, 100)+
-  labs(
-    title = &quot;Commute time of BB DUS employees&quot;, 
-    y = NULL
-  )
-</code></pre>
-
-=======
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 <p><img src="assets/fig/commute-hist-dens-1.png" alt="plot of chunk commute-hist-dens"></p>
 
     <aside class='notes'>
@@ -238,32 +174,7 @@ dta.distance %&gt;%
     <h2>Density Functions and Distributions</h2>
     <h3>Uniform distribution</h3>
 
-<<<<<<< HEAD
-<pre><code class="r"># x values for plotting
-x &lt;- seq(1, 6, by = 1)
-
-ggplot()+
-  # uniform distribution
-  geom_bar(
-    aes(x=x, y = (..count..)/sum(..count..)), size = 1.5#, colour = cbgPalette[6]
-  )+
-  labs(x = &quot;&quot;, y = &quot;&quot;, title = &quot;Uniform distribution&quot;, subtitle = &quot;A D6 die roll&quot;)+
-  # theme(
-  #   axis.text.y = element_blank(),
-  #   axis.ticks.y = element_blank()
-  # )+
-  scale_x_continuous(breaks = 1:6)#+
-</code></pre>
-
 <p><img src="assets/fig/uniform-1.png" alt="plot of chunk uniform"></p>
-
-<pre><code class="r">  #scale_y_continuous(labels = percent)
-</code></pre>
-=======
-<p><img src="assets/fig/uniform-1.png" alt="plot of chunk uniform"></p>
-
-<p>Beispielrechnung mit konkreten Zahlen: D6</p>
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 
     <aside class='notes'>
       
@@ -272,17 +183,6 @@ ggplot()+
    <section class='' data-state=''>
     <h3>Poisson (Count) distribution</h3>
 
-<<<<<<< HEAD
-<pre><code class="r">ggplot()+
-  # poisson distribution
-  geom_point(
-    aes(x=unique(as.integer(x)), y=dpois(unique(as.integer(x)), 2)), size = 3.5#, colour = cbgPalette[2]
-  )+
-  labs(x = &quot;&quot;, y = &quot;&quot;, title = &quot;Poisson (Count) distribution&quot;)
-</code></pre>
-
-=======
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 <p><img src="assets/fig/poisson-1.png" alt="plot of chunk poisson"></p>
 
     <aside class='notes'>
@@ -292,22 +192,6 @@ ggplot()+
    <section class='' data-state=''>
     <h3>Normal (Gaussian) distribution</h3>
 
-<<<<<<< HEAD
-<pre><code class="r">x &lt;- seq(-5, 5, by = 0.01)
-ggplot()+
-  # normal distribution
-  geom_line(
-    aes(x=x, y=dnorm(x)), size = 1.5#, colour = cbgPalette[6]
-  )+
-#   # lognormal distribution
-#   geom_line(
-#     aes(x=x, y=dlnorm(x)), size = 1.5, colour = cbgPalette[6]
-#   )+
-  labs(x = &quot;&quot;, y = &quot;&quot;, title = &quot;(Standard-) Normal distribution&quot;)
-</code></pre>
-
-=======
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 <p><img src="assets/fig/gaussian-1.png" alt="plot of chunk gaussian"></p>
 
     <aside class='notes'>
@@ -323,26 +207,15 @@ ggplot()+
 
 <ul>
 <li>mean (average): \(\mu = E[X]\)</li>
-<<<<<<< HEAD
 <li>standard deviation/variance: 
 \[\sigma^2 = E[(X-\mu)^2]\] </li>
-=======
-<li>standard deviation/variance: \(\sigma = \sqrt{E[(X-\mu)^2]}\)
-
-<ul>
-<li>\(\sigma = \sqrt{E[X^2] - (E[X])^2}\)</li>
-</ul></li>
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 </ul></li>
 <li>for the Normal distribution: \[X \sim \mathcal{N}(\mu,\sigma^2)\]</li>
 </ul>
 
 <!--
 median, quartiles, Fehlererwartungen, Abweichung der Betrachtung, Steamspy settlers data
-<<<<<<< HEAD
 $\sigma = \sqrt{E[X^2] - (E[X])^2}$
-=======
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 -->
 
     <aside class='notes'>
@@ -364,11 +237,7 @@ $\sigma = \sqrt{E[X^2] - (E[X])^2}$
    <section class='' data-state=''>
     <h3>Standard Deviation</h3>
 
-<<<<<<< HEAD
 <p><img src="assets/img/Standard_deviation_diagram.svg" class="gif150" /></p>
-=======
-<p><img src="./assets/img/Standard_deviation_diagram.svg" alt=""></p>
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 
     <aside class='notes'>
       
@@ -393,19 +262,7 @@ $\sigma = \sqrt{E[X^2] - (E[X])^2}$
     </aside>
    </section>
    <section class='' data-state=''>
-<<<<<<< HEAD
     <h3>Steamspy data: by average</h3>
-
-<pre><code class="r">#&lt;!-- sorted by avg playtime --&gt;
-sspy %&gt;% 
-  filter(Price != &quot;Free&quot; &amp; Owners.est &gt; 5000) %&gt;% 
-  select(Game, Owners.est, playtime_avg_h, playtime_med_h) %&gt;% 
-  arrange(-playtime_avg_h) %&gt;% 
-  head(n=5) %&gt;% 
-  kable(&quot;html&quot;) %&gt;% 
-  kable_styling(font_size = 20) %&gt;% 
-  row_spec(0, bold = TRUE)
-</code></pre>
 
 <table class="table" style="font-size: 20px; margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -447,34 +304,13 @@ sspy %&gt;%
   </tr>
 </tbody>
 </table>
-=======
-    <!-- sorted by avg playtime -->
-
-<p>knitr::kable(sspy %&gt;% filter(Price != &quot;Free&quot; &amp; Owners.est &gt; 5000) %&gt;% select(Game, Owners.est, playtime_avg_h, playtime_med_h) %&gt;% arrange(-playtime_avg_h) %&gt;% head(n=5))</p>
-
-<!-- sorted by median playtime -->
-
-<p>knitr::kable(sspy %&gt;% filter(Price != &quot;Free&quot; &amp; Owners.est &gt; 5000) %&gt;% select(Game, Owners.est, playtime_avg_h, playtime_med_h) %&gt;% arrange(-playtime_med_h) %&gt;% head(n=5))</p>
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 
     <aside class='notes'>
       
     </aside>
    </section>
    <section class='' data-state=''>
-<<<<<<< HEAD
     <h3>Steamspy data: by median</h3>
-
-<pre><code class="r">#&lt;!-- sorted by median playtime --&gt;
-sspy %&gt;% 
-  filter(Price != &quot;Free&quot; &amp; Owners.est &gt; 5000) %&gt;% 
-  select(Game, Owners.est, playtime_avg_h, playtime_med_h) %&gt;% 
-  arrange(-playtime_med_h) %&gt;% 
-  head(n=5) %&gt;% 
-  kable(&quot;html&quot;) %&gt;% 
-  kable_styling(font_size = 20) %&gt;% 
-  row_spec(0, bold = TRUE)
-</code></pre>
 
 <table class="table" style="font-size: 20px; margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -516,13 +352,6 @@ sspy %&gt;%
   </tr>
 </tbody>
 </table>
-=======
-    <h3>Others</h3>
-
-<ul>
-<li>quartiles</li>
-</ul>
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 
     <aside class='notes'>
       
@@ -532,14 +361,9 @@ sspy %&gt;%
     <h3>summary</h3>
 
 <ul>
-<<<<<<< HEAD
 <li>mean, variance, median, (log-)normal</li>
 <li>game data often has a large tail distribution</li>
 <li>the density curve is always preferable to a moment </li>
-=======
-<li>mean, variance, median, lognormal (tail distributions in games)</li>
-<li>the density curve is always preferable to a moment! </li>
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 </ul>
 
     <aside class='notes'>
@@ -555,11 +379,7 @@ sspy %&gt;%
 <li>four \(x, y\) datasets which have equal properties:
 
 <ul>
-<<<<<<< HEAD
 <li>mean \((9, 7.5)\), variance \((11, 4.12)\), correlation \((0.816)\) </li>
-=======
-<li>mean (9, 7.5), variance (11, 4.12), correlation (0.816) </li>
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 <li>linear regression: \(y = 4 + 0.346x\)</li>
 </ul></li>
 <li>showcase for data exploration!</li>
@@ -570,39 +390,7 @@ sspy %&gt;%
     </aside>
    </section>
    <section class='' data-state=''>
-<<<<<<< HEAD
-    <pre><code class="r">anscombe.dta &lt;- NULL
-for(i in 1:4){
-  anscombe.dta &lt;- bind_rows(
-    anscombe.dta, tibble(anscombe.set = letters[i], x = anscombe[, i], y = anscombe[, i+4])
-  )
-}
-
-anscombe.dta %&gt;% 
-  ggplot(aes(x, y))+
-  geom_point()+
-  geom_smooth(method = &quot;lm&quot;, se = FALSE)+
-  facet_grid(. ~ anscombe.set)+
-  labs(
-    x = &quot;x-values&quot;, y = &quot;y-values&quot;, title = &quot;Anscombe&#39;s Quartet&quot;
-  )
-</code></pre>
-
-<p><img src="assets/fig/anscombe-1.png" alt="plot of chunk anscombe"></p>
-=======
     <p><img src="assets/fig/anscombe-1.png" alt="plot of chunk anscombe"></p>
-
-    <aside class='notes'>
-      
-    </aside>
-   </section>
-</section>
-<section>
-   <section class='' data-state=''>
-    <h2>Bonus bonus: The Datasaurus</h2>
-    <p><a href="https://www.autodeskresearch.com/publications/samestats">https://www.autodeskresearch.com/publications/samestats</a>
-<a href="https://github.com/stephlocke/datasauRus">https://github.com/stephlocke/datasauRus</a></p>
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 
     <aside class='notes'>
       
@@ -615,15 +403,11 @@ anscombe.dta %&gt;%
     <blockquote>
 <p>(Statistics) A quantity measuring the extent of the interdependence of variable quantities.<br>
 <a href="https://en.oxforddictionaries.com/definition/correlation">OED definition</a></p>
-<<<<<<< HEAD
 </blockquote>
 
 <!-- -->
 
 <blockquote>
-=======
-
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 <p>The action of causing something.<br>
 <a href="https://en.oxforddictionaries.com/definition/causation">OED definition</a></p>
 </blockquote>
@@ -633,50 +417,19 @@ anscombe.dta %&gt;%
     </aside>
    </section>
    <section class='' data-state=''>
-<<<<<<< HEAD
-    <pre><code class="r"># correlation
-
-cor.dta &lt;- data.frame( 
-  x = runif(100, min = 0, max = 10)
-) %&gt;% 
-  mutate(
-    a = x + runif(100, -1, 1), 
-    b = x + runif(100, -1, 1)
-  )
-
-gg &lt;- ggplot(cor.dta)+
-  geom_point()+
-  aes(x=a, y=b)+
-  geom_smooth()+
-  labs(x=NULL, y=NULL, title = &quot;Scatterplot of A and B&quot;)
-gg
-</code></pre>
-
-<p><img src="assets/fig/correlation-1.png" alt="plot of chunk correlation"></p>
-=======
     <p><img src="assets/fig/correlation-1.png" alt="plot of chunk correlation"></p>
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 
     <aside class='notes'>
       
     </aside>
    </section>
    <section class='' data-state=''>
-<<<<<<< HEAD
-    <pre><code class="r">gg+
-  geom_text(aes(x = 1, y = 9), label = &quot;A=X+U[-1,1]\n B=X+U[-1,1]\n X~U[0,10]&quot;, hjust=0)
-</code></pre>
-
-<p><img src="assets/fig/correlation-exposed-1.png" alt="plot of chunk correlation-exposed"></p>
-=======
     <p><img src="assets/fig/correlation-exposed-1.png" alt="plot of chunk correlation-exposed"></p>
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 
     <aside class='notes'>
       
     </aside>
    </section>
-<<<<<<< HEAD
 </section>
 <section>
    <section class='' data-state=''>
@@ -691,20 +444,12 @@ gg
 <li>\(p(B) = \text{prob of pvp} = 0.2\)</li>
 <li>\(p(B|A) = 0.8\)</li>
 </ul></li>
-=======
-   <section class='' data-state=''>
-    <h3>Bayes&#39; Rule</h3>
-
-<ul>
-<li>asdf</li>
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 </ul>
 
     <aside class='notes'>
       
     </aside>
    </section>
-<<<<<<< HEAD
    <section class='' data-state=''>
     <ul>
 <li>how high is the chance of a player being a payer, given that he plays PvP? </li>
@@ -741,34 +486,10 @@ $$y_i = \beta_0 + \beta_i + \varepsilon_i$$
    <section class='' data-state=''>
     <h2>Statistical tests</h2>
     <ul>
-=======
-</section>
-<section class='' data-state='' id='slide-10'>
-  <h2>Bayes&#39; Rule</h2>
-  <p>\[p(A|B) = \frac{p(B|A)*p(A)}{p(B)}\] </p>
-
-<p><a href="https://www.eecs.qmul.ac.uk/%7Enorman/BBNs/Bayes_rule.htm">https://www.eecs.qmul.ac.uk/~norman/BBNs/Bayes_rule.htm</a></p>
-
-</section>
-<section class='' data-state='' id='slide-11'>
-  <h2>Linear Regression</h2>
-  <p>\[y_i = \beta_0 + \beta_i + \varepsilon_i\]</p>
-
-<ul>
-<li>fitted values: \[\hat y = b_0 + b_ix_i\]</li>
-<li>residuals: \[e_i = y_i - \hat y_i\]</li>
-</ul>
-
-</section>
-<section class='' data-state='' id='slide-12'>
-  
-  <ul>
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 <li>statistical difference/significance
 
 <ul>
 <li>show how two data dots come from the same distribution and can be different</li>
-<<<<<<< HEAD
 </ul></li>
 <li>representative sample
 
@@ -789,20 +510,7 @@ $$y_i = \beta_0 + \beta_i + \varepsilon_i$$
     </aside>
    </section>
    <section class='' data-state=''>
-    <pre><code class="r">ggplot()+
-  geom_line(aes(x = d1, y = dnorm(d1)), size = 2, colour = &quot;#16A085&quot;)+
-  annotate(&quot;text&quot;, x = -2.5, y = 0.12, label = &quot;d1 == N(-1.5, 0)&quot;, colour = &quot;#6ACEEB&quot;, parse = TRUE)+
-  geom_line(aes(x = d1, y = dnorm(d1+1.5)), size = 2, colour = &quot;#6ACEEB&quot;)+
-  annotate(&quot;text&quot;, x = -2, y = 0.01, label = &quot;d2 == N(0, 0)&quot;, colour = &quot;#16A085&quot;, parse = TRUE)+
-  geom_vline(xintercept = -0.5)+
-  annotate(&quot;text&quot;, x = -0.45, y = 0.01, label = &quot;x = -0.5&quot;, hjust = 0)+
-  labs(
-    x = &quot;&quot;, y = &quot;density&quot;,
-    title = &quot;Is x from distribution d1 or d2?&quot;
-  )
-</code></pre>
-
-<p><img src="assets/fig/ttests-1.png" alt="plot of chunk ttests"></p>
+    <p><img src="assets/fig/ttests-1.png" alt="plot of chunk ttests"></p>
 
     <aside class='notes'>
       
@@ -821,39 +529,11 @@ $$y_i = \beta_0 + \beta_i + \varepsilon_i$$
 <ul>
 <li>distributions are important!</li>
 </ul></li>
-=======
-<li>t-test </li>
-</ul></li>
-<li>representative Stichprobe, zB hohe level, wenig Spieler, Ausreisser/Verzerrung</li>
-</ul>
-
-</section>
-<section class='' data-state='' id='slide-13'>
-  <h2>common mistakes</h2>
-  <ul>
-<li>filtern nach sample
-
-<ul>
-<li>filter bias</li>
-</ul></li>
-<li>samples have too few players
-
-<ul>
-<li>outliers (also: cheats)</li>
-</ul></li>
-<li>avg vs mean (steamspy)
-
-<ul>
-<li>distributions are important(!)</li>
-</ul></li>
-<li>correlation is not causation</li>
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
 <li>summing of data over variables (levels)
 
 <ul>
 <li>lower levels have more players, so sums are much(!) larger</li>
 </ul></li>
-<<<<<<< HEAD
 <li>correlation is not causation</li>
 <li>self-selection</li>
 </ul>
@@ -861,19 +541,6 @@ $$y_i = \beta_0 + \beta_i + \varepsilon_i$$
 </section>
 <section class='' data-state='thanks' id='slide-12'>
   <h2>Happy stat-ing!</h2>
-=======
-<li>self-selection</li>
-<li>check validity of data
-
-<ul>
-<li>check for cheats</li>
-</ul></li>
-</ul>
-
-</section>
-<section class='' data-state='' id='slide-14'>
-  
->>>>>>> fd6862ba04b78c4d49b9a63941c73347c8db8f46
   <!--
 Lesson 1: Visualizing relationships in data
 
