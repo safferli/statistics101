@@ -53,14 +53,14 @@ background-size: contain;
 
 <p style="color: #13DAEC; font-family: 'Lato', sans-serif; font-size: 150%; margin: 0 0 10% 0;">
   Statistics 101<br />
-  <span style="font-size: 80%;">A brief overview with Game Design examples</span>
+  <span style="font-size: 80%;">a brief overview with Game Design examples</span>
 </p>
 
 <p style="font-size: 100%; color: #000000;">
-  Christoph Safferling
+  Christoph Safferling and Nadim Affani
 </p>
 <p style="font-size: 80%; margin: 3% 0 0 0; color: #222222;">
-  Head of Game Analytics and User Research<br/ > 
+  Head of Game Analytics and User Research<br/ >Senior Lead Game Designer<br/ ><br/ >
   Ubisoft Blue Byte
 </p>
 
@@ -127,7 +127,14 @@ involves methods of using information from a sample to draw conclusions about th
 
 ### Graphs and Functions
 
-Punktdiagramm zum Einstieg: Spielerlevel x, anzahl Gold y
+
+```{R scatterplot,  warning=FALSE, message=FALSE}
+readr::read_csv("../rsix_clearance_vs_nmatches.zip") %>% 
+  ggplot()+
+  geom_point(aes(x=matches, y=clearance, colour = platform, fill=platform))+
+  labs(title="Ranked match level vs matches played")
+```
+
 
 ***
 
@@ -460,6 +467,7 @@ $$y_i = \beta_0 + \beta_i + \varepsilon_i$$
 ***
 
 ```{r ttests}
+d1 <- seq(-3, 3, 0.01)
 ggplot()+
   geom_line(aes(x = d1, y = dnorm(d1)), size = 2, colour = "#16A085")+
   annotate("text", x = -2.5, y = 0.12, label = "d1 == N(-1.5, 0)", colour = "#6ACEEB", parse = TRUE)+

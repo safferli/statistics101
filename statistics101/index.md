@@ -37,14 +37,14 @@ background-size: contain;
 
 <p style="color: #13DAEC; font-family: 'Lato', sans-serif; font-size: 150%; margin: 0 0 10% 0;">
   Statistics 101<br />
-  <span style="font-size: 80%;">A brief overview with Game Design examples</span>
+  <span style="font-size: 80%;">a brief overview with Game Design examples</span>
 </p>
 
 <p style="font-size: 100%; color: #000000;">
-  Christoph Safferling
+  Christoph Safferling and Nadim Affani
 </p>
 <p style="font-size: 80%; margin: 3% 0 0 0; color: #222222;">
-  Head of Game Analytics and User Research<br/ > 
+  Head of Game Analytics and User Research<br/ >Senior Lead Game Designer<br/ ><br/ >
   Ubisoft Blue Byte
 </p>
 
@@ -111,7 +111,9 @@ involves methods of using information from a sample to draw conclusions about th
 
 ### Graphs and Functions
 
-Punktdiagramm zum Einstieg: Spielerlevel x, anzahl Gold y
+
+![plot of chunk scatterplot](assets/fig/scatterplot-1.png)
+
 
 ***
 
